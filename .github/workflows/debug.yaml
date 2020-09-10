@@ -80,7 +80,7 @@ jobs:
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.ACCESS_TOKEN }}
-          file: build/app/outputs/apk/debug/
+          file: build/app/outputs/apk/debug
           tag: ${{ steps.bump_tag.outputs.new_tag }}
           overwrite: true
           body: "Smartlets debug release"
