@@ -27,13 +27,13 @@ dependencies:
   # A Flutter plugin to use the Cloud Firestore API.
   cloud_firestore: ^0.14.0+2
   # For Facebook authentication
-#  flutter_login_facebook: ^0.2.1
+  flutter_login_facebook: ^0.2.1
   # Check Internet connectivity
   data_connection_checker: ^0.3.4
   # Service locator
   get_it: ^4.0.4
   # Flutter BloC for state management
-  flutter_bloc: ^6.0.4
+  flutter_bloc: ^6.0.5
   # Automatically persists and restores bloc states
   hydrated_bloc: ^6.0.1
   # A lightweight and blazing fast key-value database written in pure Dart.
