@@ -12,6 +12,7 @@ jobs:
     env:
       APP_NAME: "Smartlets"
       APP_VERSION: "v1.0.0-debug"
+      RUN_NUMBER: ${{ github.run_number }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -47,26 +48,11 @@ jobs:
       - run: flutter test
       - run: flutter build apk --debug --build-number=${GITHUB_RUN_NUMBER} --target-platform android-arm --split-per-abi --flavor=dev
 
-      - name: Tag and prepare release
-        id: tag_and_prepare_release
-        uses: K-Phoen/semver-release-action@master
-        with:
-          release_branch: master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Upload release notes
-        if: steps.tag_and_prepare_release.outputs.tag
-        uses: Roang-zero1/github-create-release-action@master
-        with:
-          created_tag: ${{ steps.tag_and_prepare_release.outputs.tag }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Create a Debug APK
         uses: ncipollo/release-action@v1
         with:
-          tag: ${{ steps.tag_and_prepare_release.outputs.tag }}
-          artifacts: "build/app/outputs/apk/debug/*.apk"
-          token: ${{ secrets.GITHUB_TOKEN }}
-          allowUpdates: true
+          tag: ${{ env.APP_VERSION }}-${{ env.RUN_NUMBER }}
+            commit: dev
+            artifacts: "build/app/outputs/apk/debug/*.apk"
+            token: ${{ secrets.GITHUB_TOKEN }}
+            allowUpdates: true
