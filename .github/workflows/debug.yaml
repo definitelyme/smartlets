@@ -50,14 +50,14 @@ jobs:
       - run: flutter test
       - run: flutter build apk --debug --build-number=${GITHUB_RUN_NUMBER} --target-platform android-arm --split-per-abi --flavor=dev
 
-      - name: Tag and prepare release
-        id: tag_and_prepare_release
-        uses: K-Phoen/semver-release-action@v1.3.1
-        with:
-          release_branch: dev
-          tag: ${{ env.APP_VERSION }}-${{ env.RUN_NUMBER }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+#      - name: Tag and prepare release
+#        id: tag_and_prepare_release
+#        uses: K-Phoen/semver-release-action@v1.3.1
+#        with:
+#          release_branch: dev
+#          tag: ${{ env.APP_VERSION }}-${{ env.RUN_NUMBER }}
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
 
   release:
     name: Deploy release APK
