@@ -2,10 +2,10 @@ name: Test Tag creation
 on:
   push:
     branches:
-      - dev
+      - master
   pull_request:
     branches:
-      - dev
+      - master
 jobs:
   build:
     name: Tag creation
