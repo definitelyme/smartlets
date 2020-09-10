@@ -49,6 +49,23 @@ jobs:
       - run: flutter test
       - run: flutter build apk --debug --build-number=${GITHUB_RUN_NUMBER} --target-platform android-arm --split-per-abi --flavor=dev
 
+      - name: Tag and prepare release
+        id: tag_and_prepare_release
+        uses: K-Phoen/semver-release-action@master
+        with:
+          release_branch: master
+          tag: ${{ env.APP_VERSION }}-${{ env.RUN_NUMBER }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+
+      - name: Upload release notes
+        if: steps.tag_and_prepare_release.outputs.tag
+        uses: Roang-zero1/github-create-release-action@master
+        with:
+          created_tag: ${{ steps.tag_and_prepare_release.outputs.tag }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+
       - name: Create a Debug APK
         uses: ncipollo/release-action@v1
         with:
