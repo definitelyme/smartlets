@@ -51,7 +51,20 @@ jobs:
       - run: flutter build apk --debug --build-number=${GITHUB_RUN_NUMBER} --target-platform android-arm --split-per-abi --flavor=dev
 
       - name: Copy APK To Parent Directory
-        run: mv build/app/outputs/apk/debug/app-debug.apk ./app.apk
+        run: mv ./build/app/outputs/apk/debug/*.apk ./app.apk
+
+#  vcs:
+#    name: Perform GitHub repo actions
+#    runs-on: ub
+#    steps:
+#      - name: Configure Github
+#        run: |
+#          git config --local user.email "ejike.br@gmail.com"
+#          git config --local user.name "Brendan Ejike"
+#      - name: Create TAG
+#        run: |
+#          git tag sample-tag
+#          git commit -m "Generated APK" -a
 
   release:
     name: Deploy release APK
