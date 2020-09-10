@@ -51,7 +51,7 @@ jobs:
       - run: flutter build apk --debug --build-number=${GITHUB_RUN_NUMBER} --target-platform android-arm --split-per-abi --flavor=dev
 
       - name: Copy APK To Parent Directory
-        run: mv build/app/outputs/apk/debug/*.apk ./app.apk
+        run: mv build/app/outputs/apk/debug/app-debug.apk ./app.apk
 
   release:
     name: Deploy release APK
