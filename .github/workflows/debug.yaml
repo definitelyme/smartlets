@@ -25,9 +25,9 @@ jobs:
 
       - name: Prepare NDK dir for caching
         run: |
-          sudo mkdir -p /usr/local/lib/android/sdk/tools/bin/sdkmanager
-          sudo chmod -R 777 /usr/local/lib/android/sdk/tools/bin/sdkmanager
-          sudo chown -R $USER:$USER /usr/local/lib/android/sdk/tools/bin/sdkmanager
+          sudo mkdir -p /usr/local/lib/android/sdk/ndk
+          sudo chmod -R 777 /usr/local/lib/android/sdk/ndk
+          sudo chown -R $USER:$USER /usr/local/lib/android/sdk/ndk
 
       - name: NDK Cache
         id: ndk-cache
