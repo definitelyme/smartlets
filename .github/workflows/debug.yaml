@@ -10,11 +10,9 @@ on:
 jobs:
   build:
     name: Build a debug APK
-    env:
-      APP_NAME: "Smartlets"
-      APP_VERSION: "v1.0.0-debug"
-      RUN_NUMBER: ${{ github.run_number }}
     runs-on: ubuntu-latest
+    env:
+      RUN_NUMBER: ${{ github.run_number }}
     steps:
       - uses: actions/checkout@v2
 
@@ -49,12 +47,21 @@ jobs:
       - run: flutter test
       - run: flutter build apk --debug --build-number=${GITHUB_RUN_NUMBER} --target-platform android-arm --split-per-abi --flavor=dev
 
+  release:
+    name: Release Debug Apk
+    runs-on: ubuntu-latest
+    needs: [build]
+    env:
+      APP_NAME: "Smartlets"
+      APP_VERSION: "v1.0.0"
+      RUN_NUMBER: ${{ github.run_number }}
+    steps:
       - name: Tag and prepare release
         id: tag_and_prepare_release
         uses: K-Phoen/semver-release-action@master
         with:
-          release_branch: master
-          tag: ${{ env.APP_VERSION }}-${{ env.RUN_NUMBER }}
+          release_branch: dev
+          tag: ${{ env.APP_VERSION }}
         env:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
 
@@ -69,8 +76,8 @@ jobs:
       - name: Create a Debug APK
         uses: ncipollo/release-action@v1
         with:
-          tag: ${{ env.APP_VERSION }}-${{ env.RUN_NUMBER }}
-          commit: dev
           artifacts: "build/app/outputs/apk/debug/*.apk"
           token: ${{ secrets.ACCESS_TOKEN }}
+          tag: ${{ env.APP_VERSION }}
+#          commit: dev
           allowUpdates: true
