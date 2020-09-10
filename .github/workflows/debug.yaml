@@ -66,20 +66,14 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
 
-      - name: Upload release notes
-        if: steps.tag_and_prepare_release.outputs.tag
-        uses: Roang-zero1/github-create-release-action@master
-        with:
-          created_tag: ${{ steps.tag_and_prepare_release.outputs.tag }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-
       - name: Create GitHub Release
-        uses: Roang-zero1/github-upload-release-artifacts-action@master
+        uses: svenstaro/upload-release-action@v2
         with:
-          args: build/app/outputs/apk/debug/
-        env:
-          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          repo_token: ${{ secrets.ACCESS_TOKEN }}
+          file: "build/app/outputs/apk/debug/*.apk"
+          tag: ${{ env.APP_VERSION }}-${{ env.RUN_NUMBER }}
+          overwrite: true
+          body: "Smartlets debug release "${{ env.APP_VERSION }}
 
       - name: Create a Debug APK
         uses: ncipollo/release-action@v1
