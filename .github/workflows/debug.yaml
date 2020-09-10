@@ -30,14 +30,14 @@ jobs:
           sudo chown -R $USER:$USER /usr/local/lib/android/sdk/ndk
 
       - name: NDK Cache
-        id: ndk-cache
+        id: ndk_cache
         uses: actions/cache@v2
         with:
-          path: /usr/local/lib/android/sdk/tools/bin/sdkmanager
-          key: ${{ runner.os }}-ndk-cache-21.0.6113669
+          path: /usr/local/lib/android/sdk/ndk
+          key: ${{ runner.os }}-ndk_cache-21.0.6113669
 
       - name: Install NDK
-        if: steps.ndk-cache.outputs.cache-hit != 'true'
+        if: steps.ndk_cache.outputs.cache-hit != 'true'
         run: echo "y" | sudo ${ANDROID_HOME}/tools/bin/sdkmanager --install "ndk;21.0.6113669" --sdk_root=${ANDROID_SDK_ROOT}
 
       - name: Set up Flutter Environment
@@ -55,5 +55,5 @@ jobs:
           tag: ${{ env.APP_VERSION }}-${{ env.RUN_NUMBER }}
           commit: dev
           artifacts: "build/app/outputs/apk/debug/*.apk"
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.ACCESS_TOKEN }}
           allowUpdates: true
