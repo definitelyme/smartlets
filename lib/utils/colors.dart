@@ -8,7 +8,7 @@ class AppColors {
   // App Colors
   static const _primaryPrivate = 0xffE5E5E5;
   static const _secondaryPrivate = 0xff333333;
-  static const _accentPrivate = 0xff2A7B9B;
+  static const _accentPrivate = 0xffFF8845;
 
   static const MaterialColor primaryColor = const MaterialColor(
     _primaryPrivate,
@@ -45,16 +45,16 @@ class AppColors {
   static const MaterialColor accentColor = const MaterialColor(
     _accentPrivate,
     const <int, Color>{
-      50: const Color(0xFF5fb2d3),
-      100: const Color(0xFF4ba9ce),
-      200: const Color(0xFF379fc8),
-      300: const Color(0xFF318fb4),
-      400: const Color(0xFF2c7fa0),
+      50: const Color(0xFFffcfb3),
+      100: const Color(0xFFffbe99),
+      200: const Color(0xFFffae80),
+      300: const Color(0xFFff9e66),
+      400: const Color(0xFFff8e4d),
       500: const Color(_accentPrivate),
-      600: const Color(0xFF266f8c),
-      700: const Color(0xFF215f78),
-      800: const Color(0xFF1b4f64),
-      900: const Color(0xFF164050),
+      600: const Color(0xFFff7e33),
+      700: const Color(0xFFff6e1a),
+      800: const Color(0xFFff5e00),
+      900: const Color(0xFFe65400),
     },
   );
 
