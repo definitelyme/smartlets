@@ -52,11 +52,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "939677467123-na6o0csnb1b8jocd5r7ckvsbua67dj1u.apps.googleusercontent.com",
+          "client_id": "939677467123-m4s37nt31cpnq3fqe8qhk5ks58ipf64h.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.mida.smartlets.dev",
-            "certificate_hash": "e80a17e7c925877c1488c8c8dfa21a62bbdb767f"
+            "certificate_hash": "0cae690109eccdfd1c2d3e48be5fa4a12758bd75"
           }
         },
         {
