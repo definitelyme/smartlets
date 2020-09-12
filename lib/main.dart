@@ -7,7 +7,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // Setup Environmental variables & Service provider
-  await BuildEnvironment.init(flavor: BuildFlavor.dev, baseUrl: 'https://eazox.com');
+  await BuildEnvironment.init(flavor: BuildFlavor.dev);
   assert(env != null);
 
   // Initialize Hydrated storage

@@ -13,7 +13,7 @@ class BuildEnvironment {
   BuildEnvironment._init({this.flavor});
 
   /// Sets up the top-level [env] getter on the first call only.
-  static Future<void> init({@required flavor, String baseUrl}) async {
+  static Future<void> init({@required flavor}) async {
     _env ??= BuildEnvironment._init(
       flavor: flavor,
     );

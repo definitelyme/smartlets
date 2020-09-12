@@ -35,7 +35,6 @@ class SmartletsApp extends StatelessWidget {
           theme: state?.themeData() ?? AppTheme.light().themeData(),
           darkTheme: AppTheme.dark().themeData(),
           builder: ExtendedNavigator.builder<Router>(
-            // initialRoute: Routes.splashScreen,
             navigatorKey: App.key,
             observers: [NavigationHistoryObserver()],
             router: Router(),
