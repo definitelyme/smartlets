@@ -38,6 +38,7 @@ class _VideoPlayerControlsState extends State<VideoPlayerControls> with Automati
               Positioned.fill(
                 child: FlickAutoHideChild(
                   child: AnimatedContainer(
+                    height: double.infinity,
                     duration: Duration(seconds: 1),
                     color: Theme.of(context).primaryColor.withOpacity(0.1),
                   ),
@@ -63,8 +64,8 @@ class _VideoPlayerControlsState extends State<VideoPlayerControls> with Automati
                       ),
                       child: FlickVideoBuffer(
                         bufferingChild: CircularProgressBar.adaptive(
-                          width: 40,
-                          height: 40,
+                          width: 35,
+                          height: 35,
                           strokeWidth: 3.0,
                           radius: 14,
                         ),

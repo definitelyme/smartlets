@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flick_video_player/flick_video_player.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -59,7 +60,11 @@ class _VideoWidgetState extends State<VideoWidget> with TickerProviderStateMixin
               _bloc.state.manager.flickControlManager.autoResume();
             }
           },
-          child: Container(
+          child: WillPopScope(
+            onWillPop: () async {
+              await App.forceAppUpdate();
+              return Future.value(true);
+            },
             child: FlickVideoPlayer(
               flickManager: _bloc.state.manager,
               flickVideoWithControls: FlickVideoWithControls(
@@ -67,9 +72,20 @@ class _VideoWidgetState extends State<VideoWidget> with TickerProviderStateMixin
                 willVideoPlayerControllerChange: true,
                 videoFit: BoxFit.cover,
                 iconThemeData: IconThemeData(color: Colors.white, size: 35),
-                // TODO: Build Error Fallback
-                // playerErrorFallback: Container(child: Text("Controller has errors")),
+                playerErrorFallback: Center(
+                  child: Container(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(Icons.error_outlined, color: AppColors.errorRed),
+                        VerticalSpace(height: 10),
+                        AutoSizeText("Oops! Playback error.", style: TextStyle(fontSize: 17.0)),
+                      ],
+                    ),
+                  ),
+                ),
                 playerLoadingFallback: AnimatedContainer(
+                  height: double.infinity,
                   duration: Duration(milliseconds: 400),
                   color: Colors.black54,
                   child: Center(

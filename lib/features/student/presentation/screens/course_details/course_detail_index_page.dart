@@ -173,8 +173,6 @@ class _CourseDetailIndexPageState extends State<CourseDetailIndexPage> with Auto
                     ),
                   ),
                   //
-                  VerticalSpace(height: App.height * .01),
-                  //
                   VideoWidget(),
                   //
                   Column(

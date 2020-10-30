@@ -108,7 +108,7 @@ class PlaybackBloc extends Bloc<PlaybackEvent, PlaybackState> {
                   videoPlayerOptions: VideoPlayerOptions(mixWithOthers: true),
                   // formatHint: VideoFormat.hls,
                 ),
-          autoPlay: false,
+          autoPlay: true,
           onVideoEnd: () {
             // TODO: Play Next Video
             log.w("============= Video has ended ==================");
