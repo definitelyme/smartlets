@@ -45,6 +45,7 @@ class CategoryDetailPage extends StatelessWidget {
                 children: <Widget>[
                   AutoSizeText(
                     category.title.value.fold((l) => "", id),
+                    maxLines: 1,
                     style: TextStyle(
                       color: Helpers.computeLuminance(
                         category.gradient.value.fold((l) => null, (r) => r?.asList()?.first),
@@ -55,6 +56,7 @@ class CategoryDetailPage extends StatelessWidget {
                     padding: const EdgeInsets.only(right: 8.0),
                     child: AutoSizeText(
                       category.description.value.fold((l) => "", id),
+                      maxLines: 1,
                       style: TextStyle(
                         fontWeight: FontWeight.w300,
                         fontSize: 12.0,
@@ -87,8 +89,8 @@ class CategoryDetailPage extends StatelessWidget {
                   padding: EdgeInsets.symmetric(horizontal: Helpers.appPadding, vertical: Helpers.appPadding),
                   child: const AutoSizeText(
                     "Available Courses",
-                    minFontSize: 18.0,
-                    style: TextStyle(fontWeight: FontWeight.w600),
+                    minFontSize: 16.0,
+                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18.0),
                   ),
                 ),
                 //

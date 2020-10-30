@@ -82,9 +82,8 @@ class CourseCardWidget extends StatelessWidget {
                               flex: 2,
                               child: AutoSizeText(
                                 "${course.title.value.getOrElse(() => "")}",
-                                style: TextStyle(fontWeight: FontWeight.w600),
+                                style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16.5),
                                 maxLines: 2,
-                                minFontSize: 16.0,
                                 softWrap: true,
                                 wrapWords: true,
                                 overflow: TextOverflow.ellipsis,
@@ -111,7 +110,6 @@ class CourseCardWidget extends StatelessWidget {
                                         ),
                                       ]),
                                       maxLines: 1,
-                                      minFontSize: 13.0,
                                     ),
                                   ),
                                   //
@@ -132,18 +130,17 @@ class CourseCardWidget extends StatelessWidget {
                                         ),
                                       ]),
                                       maxLines: 1,
-                                      minFontSize: 13.0,
                                     ),
                                   ),
                                   //
                                   AutoSizeText(
                                     "  \u2022  ",
-                                    minFontSize: 20,
                                     softWrap: true,
                                     maxLines: 1,
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       color: Theme.of(context).accentColor,
+                                      fontSize: 20,
                                     ),
                                   ),
                                   //
@@ -160,7 +157,6 @@ class CourseCardWidget extends StatelessWidget {
                                       ),
                                     ]),
                                     maxLines: 1,
-                                    minFontSize: 13.0,
                                   ),
                                 ],
                               ),
@@ -195,7 +191,7 @@ class CourseCardWidget extends StatelessWidget {
                                       ),
                                     ),
                                     HorizontalSpace(width: 12.0),
-                                    AutoSizeText("${progress * 100}%"),
+                                    AutoSizeText("${progress * 100}%", maxLines: 1),
                                   ],
                                 ),
                               ),
@@ -204,7 +200,7 @@ class CourseCardWidget extends StatelessWidget {
                         ),
                       ),
                       //
-                      Icon(Icons.arrow_forward_ios_rounded, size: 18.0),
+                      Icon(Icons.arrow_forward_ios_rounded, size: 16.0),
                     ],
                   ),
                 ),

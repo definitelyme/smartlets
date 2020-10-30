@@ -16,7 +16,7 @@ class _TabbedWidgetState extends State<TabbedWidget> with SingleTickerProviderSt
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 3, vsync: this, initialIndex: 0);
+    _tabController = TabController(length: _tabBarItems.length, vsync: this, initialIndex: 0);
   }
 
   @override

@@ -58,11 +58,11 @@ class HomeCategoryWidget extends StatelessWidget {
                           child: Align(
                             alignment: Alignment.center,
                             child: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                              padding: const EdgeInsets.symmetric(horizontal: 8.0),
                               child: AutoSizeText(
                                 category.title.value.fold((l) => "", (r) => r),
-                                style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-                                minFontSize: 25,
+                                style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 22.0),
+                                minFontSize: 17,
                                 textAlign: TextAlign.center,
                               ),
                             ),

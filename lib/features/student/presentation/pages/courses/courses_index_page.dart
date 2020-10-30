@@ -20,8 +20,8 @@ class CoursesIndexPage extends StatelessWidget {
           automaticallyImplyLeading: true,
           title: AutoSizeText(
             "My Courses",
-            minFontSize: 25.0,
-            style: TextStyle(color: Helpers.computeLuminance(Theme.of(context).accentColor)),
+            minFontSize: 20.0,
+            style: TextStyle(color: Helpers.computeLuminance(Theme.of(context).accentColor), fontSize: 25.0),
           ),
           toolbarHeight: App.height * 0.07,
           backgroundColor: Theme.of(context).accentColor,

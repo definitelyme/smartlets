@@ -13,15 +13,15 @@ class AboutTabWidget extends StatelessWidget {
           children: [
             AutoSizeText(
               "About this course",
-              minFontSize: 20.0,
-              style: TextStyle(fontWeight: FontWeight.w600),
+              minFontSize: 16.0,
+              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20.0),
             ),
             //
             VerticalSpace(height: App.height * 0.01),
             //
             AutoSizeText(
               "Learn how to design a website that stands out from the crowd.",
-              minFontSize: 16.0,
+              style: TextStyle(fontSize: 16.0),
             ),
             //
             VerticalSpace(height: App.height * 0.02),
@@ -33,7 +33,7 @@ class AboutTabWidget extends StatelessWidget {
                   TextSpan(text: "All levels"),
                 ],
               ),
-              minFontSize: 16.0,
+              style: TextStyle(fontSize: 16.0),
             ),
             //
             VerticalSpace(height: App.height * 0.01),
@@ -45,7 +45,7 @@ class AboutTabWidget extends StatelessWidget {
                   TextSpan(text: "500"),
                 ],
               ),
-              minFontSize: 16.0,
+              style: TextStyle(fontSize: 16.0),
             ),
             //
             VerticalSpace(height: App.height * 0.01),
@@ -57,7 +57,7 @@ class AboutTabWidget extends StatelessWidget {
                   TextSpan(text: "English"),
                 ],
               ),
-              minFontSize: 16.0,
+              style: TextStyle(fontSize: 16.0),
             ),
             //
             VerticalSpace(height: App.height * 0.01),
@@ -69,7 +69,7 @@ class AboutTabWidget extends StatelessWidget {
                   TextSpan(text: "42 hours"),
                 ],
               ),
-              minFontSize: 16.0,
+              style: TextStyle(fontSize: 16.0),
             ),
             //
             VerticalSpace(height: App.height * 0.01),
@@ -81,14 +81,14 @@ class AboutTabWidget extends StatelessWidget {
                   TextSpan(text: "31"),
                 ],
               ),
-              minFontSize: 16.0,
+              style: TextStyle(fontSize: 16.0),
             ),
             //
             VerticalSpace(height: App.height * 0.03),
             //
             AutoSizeText(
               "Get Smartlets certificate by completing the entire course.",
-              minFontSize: 16.0,
+              style: TextStyle(fontSize: 16.0),
             ),
           ],
         ),

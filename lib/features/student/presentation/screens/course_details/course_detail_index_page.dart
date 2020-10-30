@@ -14,13 +14,9 @@ import 'package:smartlets/utils/utils.dart';
 import 'package:smartlets/widgets/widgets.dart';
 
 part 'package:smartlets/features/student/presentation/screens/course_details/instructor_tile.dart';
-
 part 'package:smartlets/features/student/presentation/screens/course_details/tabbed_widget.dart';
-
 part 'package:smartlets/features/student/presentation/screens/course_details/tabs/about_tab_widget.dart';
-
 part 'package:smartlets/features/student/presentation/screens/course_details/tabs/discussion_tab_widget.dart';
-
 part 'package:smartlets/features/student/presentation/screens/course_details/tabs/lessons_tab_widget.dart';
 
 class CourseDetailIndexPage extends StatefulWidget with AutoRouteWrapper {
@@ -66,7 +62,7 @@ class _CourseDetailIndexPageState extends State<CourseDetailIndexPage> with Auto
                           Flexible(
                             child: AutoSizeText(
                               "Design",
-                              minFontSize: 18.0,
+                              minFontSize: 17.0,
                               style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).accentColor),
                               textAlign: TextAlign.left,
                             ),
@@ -74,10 +70,9 @@ class _CourseDetailIndexPageState extends State<CourseDetailIndexPage> with Auto
                           Flexible(
                             flex: 2,
                             child: AutoSizeText(
-                              widget.course.title.getOrCrash,
-                              minFontSize: 24,
+                              widget.course.title.value.getOrElse(() => ""),
                               maxLines: 3,
-                              style: TextStyle(fontWeight: FontWeight.w600),
+                              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 22.0),
                               textAlign: TextAlign.left,
                               softWrap: true,
                               wrapWords: true,
@@ -100,16 +95,15 @@ class _CourseDetailIndexPageState extends State<CourseDetailIndexPage> with Auto
                                         TextSpan(children: [
                                           TextSpan(
                                             text: "${widget.course.duration.inHours}",
-                                            style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16.0),
+                                            style: TextStyle(fontWeight: FontWeight.w600),
                                           ),
                                           TextSpan(text: " "),
                                           TextSpan(
                                             text: "hour".pluralize(widget.course.duration.inHours),
-                                            style: TextStyle(fontSize: 15.0),
+                                            style: TextStyle(fontSize: 16.0),
                                           ),
-                                        ], style: TextStyle(color: AppColors.fromHex("#6E798C"))),
+                                        ], style: TextStyle(color: AppColors.fromHex("#6E798C"), fontSize: 17.0)),
                                         maxLines: 1,
-                                        minFontSize: 16.0,
                                       ),
                                     ),
                                     //
@@ -121,16 +115,15 @@ class _CourseDetailIndexPageState extends State<CourseDetailIndexPage> with Auto
                                         TextSpan(children: [
                                           TextSpan(
                                             text: "${widget.course.duration.inMinutes.remainder(60)}",
-                                            style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16.0),
+                                            style: TextStyle(fontWeight: FontWeight.w600),
                                           ),
                                           TextSpan(text: " "),
                                           TextSpan(
                                             text: "minute".pluralize(widget.course.duration.inMinutes.remainder(60)),
-                                            style: TextStyle(fontSize: 15.0),
+                                            style: TextStyle(fontSize: 16.0),
                                           ),
-                                        ], style: TextStyle(color: AppColors.fromHex("#6E798C"))),
+                                        ], style: TextStyle(color: AppColors.fromHex("#6E798C"), fontSize: 17.0)),
                                         maxLines: 1,
-                                        minFontSize: 16.0,
                                       ),
                                     ),
                                   ],
@@ -146,16 +139,15 @@ class _CourseDetailIndexPageState extends State<CourseDetailIndexPage> with Auto
                                       TextSpan(children: [
                                         TextSpan(
                                           text: "${widget.course.lessons}",
-                                          style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16.0),
+                                          style: TextStyle(fontWeight: FontWeight.w600),
                                         ),
                                         TextSpan(text: " "),
                                         TextSpan(
                                           text: "lessons",
-                                          style: TextStyle(fontSize: 15.0),
+                                          style: TextStyle(fontSize: 16.0),
                                         ),
-                                      ], style: TextStyle(color: AppColors.fromHex("#6E798C"))),
+                                      ], style: TextStyle(color: AppColors.fromHex("#6E798C"), fontSize: 17.0)),
                                       maxLines: 1,
-                                      minFontSize: 16.0,
                                     ),
                                   ],
                                 ),
