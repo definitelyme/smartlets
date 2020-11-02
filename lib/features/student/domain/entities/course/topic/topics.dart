@@ -20,9 +20,23 @@ class Topics extends FieldObject<KtList<Topic>> {
 
   bool get isNotEmpty => value.getOrElse(() => emptyList()).isNotEmpty();
 
+  Topic get first => value.getOrElse(() => emptyList())?.first();
+
+  Topic get last => value.getOrElse(() => emptyList())?.last();
+
+  KtList<Topic> get getOrEmpty => value.getOrElse(() => emptyList())?.orEmpty();
+
   int get lessonsCount => value?.getOrElse(() => emptyList())?.iter?.fold(0, (p, e) => p + e.lessonsCount);
 
   Duration get duration => value?.getOrElse(() => emptyList())?.iter?.fold(Duration.zero, (p, e) => p + e.duration);
+
+  Topic get(int index) => value.getOrElse(() => emptyList())?.elementAtOrNull(index);
+
+  KtList<Topic> add(Topic e) => value.getOrElse(() => emptyList())?.plusElement(e);
+
+  KtList<Topic> remove(Topic e) => value.getOrElse(() => emptyList())?.minusElement(e);
+
+  bool exists(Topic topic) => value.getOrElse(() => emptyList())?.any((a) => a == topic);
 
   KtList<R> map<R>(R Function(Topic) transform) => value.getOrElse(() => emptyList()).map(transform);
 

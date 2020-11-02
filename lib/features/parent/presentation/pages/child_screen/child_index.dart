@@ -1,14 +1,21 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:smartlets/features/parent/presentation/pages/pages.dart';
 import 'package:smartlets/utils/utils.dart';
 import 'package:smartlets/widgets/widgets.dart';
 
-class ChildIndexPage extends StatelessWidget {
+class ChildIndexPage extends StatelessWidget with AutoRouteWrapper {
+  @override
+  Widget wrappedRoute(BuildContext context) {
+    return this;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _EmptyList(),
+      body: ChildrenListingPage(),
     );
   }
 }
@@ -26,7 +33,7 @@ class _EmptyList extends StatelessWidget {
             //
             VerticalSpace(height: App.height * 0.04),
             //
-            AutoSizeText(
+            const AutoSizeText(
               "Add your child to view progress, achievements and help them "
               "complete their exercises and projects.",
               minFontSize: 15.0,
@@ -40,7 +47,7 @@ class _EmptyList extends StatelessWidget {
             MkButton(
               text: "Add Child",
               exteriorPadding: EdgeInsets.symmetric(horizontal: App.width * 0.04),
-              onPressed: () {},
+              onPressed: () => inner(context).pushCreateChildAccountPage(),
             ),
           ],
         ),

@@ -99,7 +99,7 @@ class _FormWidget extends StatelessWidget {
                 ),
                 onChanged: (value) => bloc.add(AuthEvent.passwordChanged(value, mode: FIELD_VALIDATION.BASIC)),
                 validator: (value) => bloc.state.password.value.fold((error) => error.message, (r) => null),
-                onFieldSubmitted: (_) => FocusScope.of(context).unfocus(),
+                onFieldSubmitted: (_) => FocusScope.of(context).nextFocus(),
               ),
               //
               Positioned(

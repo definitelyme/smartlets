@@ -7,7 +7,9 @@ abstract class AuthEvent with _$AuthEvent {
 
   const factory AuthEvent.emailChanged(String email) = _EmailChanged;
 
-  const factory AuthEvent.parentEmailChanged(String email) = _ParentEmailChanged;
+  const factory AuthEvent.guardianEmailChanged(String email) = _GuardianEmailChanged;
+
+  const factory AuthEvent.genderChanged(GenderType gender) = _GenderChanged;
 
   const factory AuthEvent.passwordChanged(String password, {FIELD_VALIDATION mode}) = _PasswordChanged;
 
@@ -19,7 +21,12 @@ abstract class AuthEvent with _$AuthEvent {
 
   const factory AuthEvent.signInWithEmailAndPassword() = _SignInWithEmailAndPassword;
 
+  // Used to create Parent Account
   const factory AuthEvent.createAccountWithEmailAndPassword() = _CreateAccountWithEmailAndPassword;
+  // Used to create Instructor's Account with privileges
+  const factory AuthEvent.createInstructorAccount() = _CreateInstructorAccount;
+  // Used to create Student's Account
+  const factory AuthEvent.createStudentAccount() = _CreateStudentAccount;
 
   const factory AuthEvent.updateProfile() = _UpdateProfile;
 

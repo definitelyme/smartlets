@@ -20,7 +20,21 @@ class Lessons extends FieldObject<KtList<Lesson>> {
 
   int get length => value.getOrElse(() => emptyList()).size;
 
+  Lesson get first => value.getOrElse(() => emptyList())?.first();
+
+  Lesson get last => value.getOrElse(() => emptyList())?.last();
+
+  KtList<Lesson> get getOrEmpty => value.getOrElse(() => emptyList())?.orEmpty();
+
   Duration get duration => value.getOrElse(() => emptyList()).iter.fold<Duration>(Duration.zero, (p, c) => p + c.duration);
+
+  Lesson get(int index) => value.getOrElse(() => emptyList())?.elementAtOrNull(index);
+
+  KtList<Lesson> add(Lesson e) => value.getOrElse(() => emptyList())?.plusElement(e);
+
+  KtList<Lesson> remove(Lesson e) => value.getOrElse(() => emptyList())?.minusElement(e);
+
+  bool exists(Lesson lesson) => value.getOrElse(() => emptyList())?.any((a) => a == lesson);
 
   KtList<R> map<R>(R Function(Lesson) transform) => value.getOrElse(() => emptyList()).map(transform);
 

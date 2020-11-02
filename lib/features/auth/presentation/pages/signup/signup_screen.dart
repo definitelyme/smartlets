@@ -124,14 +124,14 @@ class SignupScreen extends StatelessWidget with AutoRouteWrapper {
                     ),
                   ),
                   //
-                  VerticalSpace(height: App.height * 0.01),
+                  VerticalSpace(height: App.height * 0.015),
                   //
                   GestureDetector(
                     onTap: () {},
                     child: AutoSizeText.rich(
                       TextSpan(
                         children: [
-                          TextSpan(text: "By clicking create account you agree to our"),
+                          TextSpan(text: "By clicking \"create account\" you agree to our"),
                           TextSpan(text: " "),
                           TextSpan(
                             text: "terms",
@@ -154,6 +154,7 @@ class SignupScreen extends StatelessWidget with AutoRouteWrapper {
                       ),
                       softWrap: true,
                       maxLines: 2,
+                      style: TextStyle(fontSize: 15.0),
                     ),
                   ),
                   //

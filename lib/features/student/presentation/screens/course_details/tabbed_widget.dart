@@ -32,7 +32,7 @@ class _TabbedWidgetState extends State<TabbedWidget> with SingleTickerProviderSt
           indicatorSize: TabBarIndicatorSize.label,
           labelStyle: TextStyle(fontWeight: FontWeight.w600, fontSize: 17.0),
           unselectedLabelColor: Colors.grey,
-          indicatorPadding: EdgeInsets.symmetric(vertical: 8.0, horizontal: -10.0),
+          indicatorPadding: EdgeInsets.symmetric(vertical: App.height * 0.008, horizontal: -10.0),
           tabs: _tabBarItems
               .map<Widget>(
                 (item) => Container(
@@ -47,7 +47,9 @@ class _TabbedWidgetState extends State<TabbedWidget> with SingleTickerProviderSt
         controller: _tabController,
         children: [
           LessonsTabWidget(),
+          //
           AboutTabWidget(),
+          //
           DiscussionTabWidget(),
         ],
       ),

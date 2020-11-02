@@ -33,8 +33,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       emailChanged: (e) async* {
         yield state.copyWith(emailAddress: EmailAddress(e.email));
       },
-      parentEmailChanged: (e) async* {
-        yield state.copyWith(parentEmailAddress: EmailAddress(e.email));
+      guardianEmailChanged: (e) async* {
+        yield state.copyWith(guardianEmailAddress: EmailAddress(e.email));
+      },
+      genderChanged: (e) async* {
+        yield state.copyWith(gender: Gender(e.gender));
       },
       passwordChanged: (e) async* {
         yield state.copyWith(password: Password(e.password, mode: e.mode));
@@ -54,6 +57,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       createAccountWithEmailAndPassword: (_) async* {
         yield* _mapCreateAccountWithEmailAndPassword(_);
         await _auth.updateProfile(name: state.displayName);
+      },
+      createInstructorAccount: (_) async* {
+        yield* _mapCreateInstructorAccount(_);
+      },
+      createStudentAccount: (_) async* {
+        yield* _mapCreateStudentAccount(_);
       },
       updateProfile: (_) async* {
         yield* _mapUpdateProfile(_);
@@ -204,4 +213,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       snackbarDismissed: false,
     );
   }
+
+  Stream<AuthState> _mapCreateStudentAccount(_CreateStudentAccount e) async* {
+    yield state.copyWith(
+      validate: true,
+      authStatus: some(right(unit)),
+      snackbarDismissed: false,
+    );
+  }
+
+  Stream<AuthState> _mapCreateInstructorAccount(_CreateInstructorAccount e) async* {}
 }

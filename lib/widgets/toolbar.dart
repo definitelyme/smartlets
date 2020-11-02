@@ -8,10 +8,12 @@ class Toolbar extends AppBar {
   Toolbar({
     Key key,
     String title,
-    Widget leading,
+    Widget leadingIcon,
     TextStyle titleStyle,
     bool centerTitle = true,
     bool implyLeading = true,
+    bool leadingCondition,
+    VoidCallback leadingAction,
     double elevation = 0.0,
     double fontSize,
     double height,
@@ -35,12 +37,12 @@ class Toolbar extends AppBar {
           elevation: elevation,
           backgroundColor: backgroundColor,
           actions: actions,
-          leading: implyLeading && navigator.canPop()
+          leading: leadingCondition ?? navigator.canPop()
               ? Tooltip(
                   message: "Back",
                   child: IconButton(
-                    icon: leading ?? Icon(Icons.keyboard_backspace_rounded),
-                    onPressed: () => navigator.pop(),
+                    icon: leadingIcon ?? Icon(Icons.keyboard_backspace_rounded),
+                    onPressed: leadingAction ?? navigator.pop,
                   ),
                 )
               : null,

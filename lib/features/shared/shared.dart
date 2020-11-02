@@ -1,3 +1,6 @@
+export 'domain/entities/fields/shared_fields.dart';
+export 'domain/entities/instructor/instructor.dart';
+export 'domain/entities/student/student.dart';
 export 'domain/entities/unique_id.dart';
 export 'domain/entities/user/user.dart';
 export 'domain/field_object.dart';

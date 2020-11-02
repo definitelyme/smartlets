@@ -4,3 +4,4 @@ export 'responsive_safe_area.dart';
 export 'rounded_button.dart';
 export 'toolbar.dart';
 export 'vertical_spacer.dart';
+export 'sliver_appbar_delegate.dart';

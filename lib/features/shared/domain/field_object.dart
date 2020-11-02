@@ -25,6 +25,10 @@ abstract class FieldObject<T> {
         throw UnExpectedFailure(message: failure.message);
       }, id);
 
+  T get getOrNull => value.fold((failure) => null, id);
+
+  T get getOrEmpty => value.fold((failure) => T is Iterable ? [] : "", id);
+
   @override
   bool operator ==(other) {
     if (identical(this, other)) return true;

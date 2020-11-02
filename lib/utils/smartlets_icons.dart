@@ -24,7 +24,9 @@ class Smartlets {
   static const IconData bell_outlined = IconData(0xe800, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData bell_filled = IconData(0xe801, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData bookmark_outline = IconData(0xe802, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData compass = IconData(0xe803, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData bookmark = IconData(0xe804, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData compass_outline = IconData(0xe805, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData group_users_outlined = IconData(0xe807, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData kids_filled = IconData(0xe808, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData kids_outlined = IconData(0xe809, fontFamily: _kFontFam, fontPackage: _kFontPkg);
@@ -58,4 +60,7 @@ class Smartlets {
   static const IconData low_volume = IconData(0xe84a, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData mute_volume = IconData(0xe84b, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData notification = IconData(0xe87b, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData project_idea = IconData(0xe8a8, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData star_award = IconData(0xe8a9, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData trophy = IconData(0xe8aa, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 }

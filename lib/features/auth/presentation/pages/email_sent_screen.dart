@@ -48,7 +48,7 @@ class EmailSentScreen extends StatelessWidget with AutoRouteWrapper {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Toolbar(leading: Icon(Icons.close_rounded)),
+      appBar: Toolbar(leadingIcon: Icon(Icons.close_rounded)),
       body: Center(
         child: SingleChildScrollView(
           clipBehavior: Clip.antiAliasWithSaveLayer,

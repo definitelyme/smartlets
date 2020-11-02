@@ -93,6 +93,8 @@ class ParentProfileIndex extends StatelessWidget with AutoRouteWrapper {
                     ).toList(),
                   ),
                 ),
+                //
+                VerticalSpace(height: App.height * 0.08),
               ],
             ),
           ),

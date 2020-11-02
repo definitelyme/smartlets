@@ -14,8 +14,11 @@ class CourseCardWidget extends StatelessWidget {
   final double imageRadius;
   final double progress;
   final String image;
+  final Color backgroundColor;
   final bool showProgress;
   final bool showRating;
+  final bool useAltDurationAndLesson;
+  final bool showDurationAndLesson;
 
   CourseCardWidget({
     Key key,
@@ -25,8 +28,11 @@ class CourseCardWidget extends StatelessWidget {
     this.radius = 16.0,
     this.imageRadius = 8.0,
     @required this.image,
+    this.backgroundColor = Colors.transparent,
     this.showProgress = false,
     this.showRating = false,
+    this.useAltDurationAndLesson = false,
+    this.showDurationAndLesson = false,
   })  : height = height ?? App.height * 0.13,
         super(key: key);
 
@@ -38,12 +44,12 @@ class CourseCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Colors.transparent,
+      color: useAltDurationAndLesson ? backgroundColor : Colors.transparent,
       type: MaterialType.card,
       clipBehavior: Clip.antiAliasWithSaveLayer,
       shape: RoundedRectangleBorder(
         side: BorderSide(
-          color: AppColors.fromHex("#EBECED"),
+          color: useAltDurationAndLesson ? backgroundColor : AppColors.fromHex("#EBECED"),
           width: 1.0,
           style: BorderStyle.solid,
         ),
@@ -51,7 +57,7 @@ class CourseCardWidget extends StatelessWidget {
       ),
       child: InkWell(
         onTap: () => ExtendedNavigator.root.pushCourseDetailScreen(course: course),
-        splashColor: Colors.grey.shade300,
+        splashColor: Helpers.optionOf(Colors.grey.shade300, Colors.grey.shade600, context: context),
         child: SizedBox(
           height: height,
           child: Padding(
@@ -79,6 +85,53 @@ class CourseCardWidget extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Flexible(
+                              child: Visibility(
+                                visible: useAltDurationAndLesson,
+                                replacement: SizedBox.shrink(),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    AutoSizeText.rich(
+                                      TextSpan(children: [
+                                        TextSpan(
+                                          text: "${course.lessons}",
+                                          style: TextStyle(fontSize: 15.0),
+                                        ),
+                                        TextSpan(text: " "),
+                                        TextSpan(
+                                          text: "lessons",
+                                          style: TextStyle(fontSize: 15.0),
+                                        ),
+                                      ]),
+                                      maxLines: 1,
+                                    ),
+                                    //
+                                    AutoSizeText(
+                                      "  \u2022  ",
+                                      softWrap: true,
+                                      maxLines: 1,
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: useAltDurationAndLesson ? Colors.black : Theme.of(context).accentColor,
+                                        fontSize: 20,
+                                      ),
+                                    ),
+                                    //
+                                    AutoSizeText(
+                                      "2 Completed",
+                                      maxLines: 1,
+                                      style: TextStyle(
+                                        fontSize: 15.0,
+                                        color: Theme.of(context).accentColor,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            //
+                            Flexible(
                               flex: 2,
                               child: AutoSizeText(
                                 "${course.title.value.getOrElse(() => "")}",
@@ -91,80 +144,85 @@ class CourseCardWidget extends StatelessWidget {
                             ),
                             //
                             Flexible(
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Visibility(
-                                    visible: course.duration.inHours > 0,
-                                    child: AutoSizeText.rich(
+                              child: Visibility(
+                                visible: showDurationAndLesson,
+                                replacement: SizedBox.shrink(),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Visibility(
+                                      visible: course.duration.inHours > 0,
+                                      child: AutoSizeText.rich(
+                                        TextSpan(children: [
+                                          TextSpan(
+                                            text: "${course.duration.inHours}",
+                                            style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16.0),
+                                          ),
+                                          TextSpan(text: " "),
+                                          TextSpan(
+                                            text: "hour".pluralize(course.duration.inHours),
+                                            style: TextStyle(fontSize: 15.0),
+                                          ),
+                                        ]),
+                                        maxLines: 1,
+                                      ),
+                                    ),
+                                    //
+                                    AutoSizeText(" "),
+                                    //
+                                    Visibility(
+                                      visible: course.duration.inMinutes.remainder(60) > 0,
+                                      child: AutoSizeText.rich(
+                                        TextSpan(children: [
+                                          TextSpan(
+                                            text: "${course.duration.inMinutes.remainder(60)}",
+                                            style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16.0),
+                                          ),
+                                          TextSpan(text: " "),
+                                          TextSpan(
+                                            text: "minute".pluralize(course.duration.inMinutes.remainder(60)),
+                                            style: TextStyle(fontSize: 15.0),
+                                          ),
+                                        ]),
+                                        maxLines: 1,
+                                      ),
+                                    ),
+                                    //
+                                    AutoSizeText(
+                                      "  \u2022  ",
+                                      softWrap: true,
+                                      maxLines: 1,
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Theme.of(context).accentColor,
+                                        fontSize: 20,
+                                      ),
+                                    ),
+                                    //
+                                    AutoSizeText.rich(
                                       TextSpan(children: [
                                         TextSpan(
-                                          text: "${course.duration.inHours}",
+                                          text: "${course.lessons}",
                                           style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16.0),
                                         ),
                                         TextSpan(text: " "),
                                         TextSpan(
-                                          text: "hour".pluralize(course.duration.inHours),
+                                          text: "lessons",
                                           style: TextStyle(fontSize: 15.0),
                                         ),
                                       ]),
                                       maxLines: 1,
                                     ),
-                                  ),
-                                  //
-                                  AutoSizeText(" "),
-                                  //
-                                  Visibility(
-                                    visible: course.duration.inMinutes.remainder(60) > 0,
-                                    child: AutoSizeText.rich(
-                                      TextSpan(children: [
-                                        TextSpan(
-                                          text: "${course.duration.inMinutes.remainder(60)}",
-                                          style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16.0),
-                                        ),
-                                        TextSpan(text: " "),
-                                        TextSpan(
-                                          text: "minute".pluralize(course.duration.inMinutes.remainder(60)),
-                                          style: TextStyle(fontSize: 15.0),
-                                        ),
-                                      ]),
-                                      maxLines: 1,
-                                    ),
-                                  ),
-                                  //
-                                  AutoSizeText(
-                                    "  \u2022  ",
-                                    softWrap: true,
-                                    maxLines: 1,
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Theme.of(context).accentColor,
-                                      fontSize: 20,
-                                    ),
-                                  ),
-                                  //
-                                  AutoSizeText.rich(
-                                    TextSpan(children: [
-                                      TextSpan(
-                                        text: "${course.lessons}",
-                                        style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16.0),
-                                      ),
-                                      TextSpan(text: " "),
-                                      TextSpan(
-                                        text: "lessons",
-                                        style: TextStyle(fontSize: 15.0),
-                                      ),
-                                    ]),
-                                    maxLines: 1,
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
                             //
                             Flexible(
                               child: Visibility(
                                 visible: showRating,
+                                replacement: SizedBox.shrink(),
                                 child: RatingBarIndicator(
                                   rating: course.rating.getOrCrash,
                                   itemBuilder: (context, index) => Icon(
@@ -181,17 +239,23 @@ class CourseCardWidget extends StatelessWidget {
                             Flexible(
                               child: Visibility(
                                 visible: showProgress,
+                                replacement: SizedBox.shrink(),
                                 child: Row(
                                   children: [
                                     Expanded(
                                       child: ClipRRect(
                                         borderRadius: BorderRadius.circular(50.0),
                                         clipBehavior: Clip.antiAliasWithSaveLayer,
-                                        child: LinearProgressIndicator(value: progress),
+                                        child: LinearProgressIndicator(
+                                          value: progress,
+                                          backgroundColor: Helpers.optionOf(Colors.grey.shade200, Colors.grey.shade700),
+                                        ),
                                       ),
                                     ),
+                                    //
                                     HorizontalSpace(width: 12.0),
-                                    AutoSizeText("${progress * 100}%", maxLines: 1),
+                                    //
+                                    AutoSizeText("${(progress * 100).toStringAsPrecision(3)}%", maxLines: 1),
                                   ],
                                 ),
                               ),

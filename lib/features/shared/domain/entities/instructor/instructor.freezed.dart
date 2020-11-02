@@ -1,7 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
 
-part of user;
+part of 'instructor.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -10,23 +10,27 @@ part of user;
 T _$identity<T>(T value) => value;
 
 /// @nodoc
-class _$UserTearOff {
-  const _$UserTearOff();
+class _$InstructorTearOff {
+  const _$InstructorTearOff();
 
 // ignore: unused_element
-  _User call(
+  _Instructor call(
       {@required UniqueId id,
-      @required @nullable String displayName,
-      @required String email,
-      @required @nullable bool isEmailVerified,
+      @required @nullable DisplayName displayName,
+      @required EmailAddress email,
+      @required Biography bio,
+      @required Specialty specialty,
+      @required bool isEmailVerified,
       @required @nullable String phone,
       @required @nullable String photoURL,
       @required DateTime createdAt,
       @required DateTime lastSeenAt}) {
-    return _User(
+    return _Instructor(
       id: id,
       displayName: displayName,
       email: email,
+      bio: bio,
+      specialty: specialty,
       isEmailVerified: isEmailVerified,
       phone: phone,
       photoURL: photoURL,
@@ -38,15 +42,16 @@ class _$UserTearOff {
 
 /// @nodoc
 // ignore: unused_element
-const $User = _$UserTearOff();
+const $Instructor = _$InstructorTearOff();
 
 /// @nodoc
-mixin _$User {
+mixin _$Instructor {
   UniqueId get id;
   @nullable
-  String get displayName;
-  String get email;
-  @nullable
+  DisplayName get displayName;
+  EmailAddress get email;
+  Biography get bio;
+  Specialty get specialty;
   bool get isEmailVerified;
   @nullable
   String get phone;
@@ -55,18 +60,21 @@ mixin _$User {
   DateTime get createdAt;
   DateTime get lastSeenAt;
 
-  $UserCopyWith<User> get copyWith;
+  $InstructorCopyWith<Instructor> get copyWith;
 }
 
 /// @nodoc
-abstract class $UserCopyWith<$Res> {
-  factory $UserCopyWith(User value, $Res Function(User) then) =
-      _$UserCopyWithImpl<$Res>;
+abstract class $InstructorCopyWith<$Res> {
+  factory $InstructorCopyWith(
+          Instructor value, $Res Function(Instructor) then) =
+      _$InstructorCopyWithImpl<$Res>;
   $Res call(
       {UniqueId id,
-      @nullable String displayName,
-      String email,
-      @nullable bool isEmailVerified,
+      @nullable DisplayName displayName,
+      EmailAddress email,
+      Biography bio,
+      Specialty specialty,
+      bool isEmailVerified,
       @nullable String phone,
       @nullable String photoURL,
       DateTime createdAt,
@@ -74,18 +82,20 @@ abstract class $UserCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
-  _$UserCopyWithImpl(this._value, this._then);
+class _$InstructorCopyWithImpl<$Res> implements $InstructorCopyWith<$Res> {
+  _$InstructorCopyWithImpl(this._value, this._then);
 
-  final User _value;
+  final Instructor _value;
   // ignore: unused_field
-  final $Res Function(User) _then;
+  final $Res Function(Instructor) _then;
 
   @override
   $Res call({
     Object id = freezed,
     Object displayName = freezed,
     Object email = freezed,
+    Object bio = freezed,
+    Object specialty = freezed,
     Object isEmailVerified = freezed,
     Object phone = freezed,
     Object photoURL = freezed,
@@ -94,9 +104,13 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
   }) {
     return _then(_value.copyWith(
       id: id == freezed ? _value.id : id as UniqueId,
-      displayName:
-          displayName == freezed ? _value.displayName : displayName as String,
-      email: email == freezed ? _value.email : email as String,
+      displayName: displayName == freezed
+          ? _value.displayName
+          : displayName as DisplayName,
+      email: email == freezed ? _value.email : email as EmailAddress,
+      bio: bio == freezed ? _value.bio : bio as Biography,
+      specialty:
+          specialty == freezed ? _value.specialty : specialty as Specialty,
       isEmailVerified: isEmailVerified == freezed
           ? _value.isEmailVerified
           : isEmailVerified as bool,
@@ -111,15 +125,18 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
-  factory _$UserCopyWith(_User value, $Res Function(_User) then) =
-      __$UserCopyWithImpl<$Res>;
+abstract class _$InstructorCopyWith<$Res> implements $InstructorCopyWith<$Res> {
+  factory _$InstructorCopyWith(
+          _Instructor value, $Res Function(_Instructor) then) =
+      __$InstructorCopyWithImpl<$Res>;
   @override
   $Res call(
       {UniqueId id,
-      @nullable String displayName,
-      String email,
-      @nullable bool isEmailVerified,
+      @nullable DisplayName displayName,
+      EmailAddress email,
+      Biography bio,
+      Specialty specialty,
+      bool isEmailVerified,
       @nullable String phone,
       @nullable String photoURL,
       DateTime createdAt,
@@ -127,30 +144,37 @@ abstract class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
-    implements _$UserCopyWith<$Res> {
-  __$UserCopyWithImpl(_User _value, $Res Function(_User) _then)
-      : super(_value, (v) => _then(v as _User));
+class __$InstructorCopyWithImpl<$Res> extends _$InstructorCopyWithImpl<$Res>
+    implements _$InstructorCopyWith<$Res> {
+  __$InstructorCopyWithImpl(
+      _Instructor _value, $Res Function(_Instructor) _then)
+      : super(_value, (v) => _then(v as _Instructor));
 
   @override
-  _User get _value => super._value as _User;
+  _Instructor get _value => super._value as _Instructor;
 
   @override
   $Res call({
     Object id = freezed,
     Object displayName = freezed,
     Object email = freezed,
+    Object bio = freezed,
+    Object specialty = freezed,
     Object isEmailVerified = freezed,
     Object phone = freezed,
     Object photoURL = freezed,
     Object createdAt = freezed,
     Object lastSeenAt = freezed,
   }) {
-    return _then(_User(
+    return _then(_Instructor(
       id: id == freezed ? _value.id : id as UniqueId,
-      displayName:
-          displayName == freezed ? _value.displayName : displayName as String,
-      email: email == freezed ? _value.email : email as String,
+      displayName: displayName == freezed
+          ? _value.displayName
+          : displayName as DisplayName,
+      email: email == freezed ? _value.email : email as EmailAddress,
+      bio: bio == freezed ? _value.bio : bio as Biography,
+      specialty:
+          specialty == freezed ? _value.specialty : specialty as Specialty,
       isEmailVerified: isEmailVerified == freezed
           ? _value.isEmailVerified
           : isEmailVerified as bool,
@@ -165,18 +189,23 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
 }
 
 /// @nodoc
-class _$_User extends _User with DiagnosticableTreeMixin {
-  const _$_User(
+class _$_Instructor extends _Instructor {
+  const _$_Instructor(
       {@required this.id,
       @required @nullable this.displayName,
       @required this.email,
-      @required @nullable this.isEmailVerified,
+      @required this.bio,
+      @required this.specialty,
+      @required this.isEmailVerified,
       @required @nullable this.phone,
       @required @nullable this.photoURL,
       @required this.createdAt,
       @required this.lastSeenAt})
       : assert(id != null),
         assert(email != null),
+        assert(bio != null),
+        assert(specialty != null),
+        assert(isEmailVerified != null),
         assert(createdAt != null),
         assert(lastSeenAt != null),
         super._();
@@ -185,11 +214,14 @@ class _$_User extends _User with DiagnosticableTreeMixin {
   final UniqueId id;
   @override
   @nullable
-  final String displayName;
+  final DisplayName displayName;
   @override
-  final String email;
+  final EmailAddress email;
   @override
-  @nullable
+  final Biography bio;
+  @override
+  final Specialty specialty;
+  @override
   final bool isEmailVerified;
   @override
   @nullable
@@ -203,29 +235,14 @@ class _$_User extends _User with DiagnosticableTreeMixin {
   final DateTime lastSeenAt;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'User(id: $id, displayName: $displayName, email: $email, isEmailVerified: $isEmailVerified, phone: $phone, photoURL: $photoURL, createdAt: $createdAt, lastSeenAt: $lastSeenAt)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'User'))
-      ..add(DiagnosticsProperty('id', id))
-      ..add(DiagnosticsProperty('displayName', displayName))
-      ..add(DiagnosticsProperty('email', email))
-      ..add(DiagnosticsProperty('isEmailVerified', isEmailVerified))
-      ..add(DiagnosticsProperty('phone', phone))
-      ..add(DiagnosticsProperty('photoURL', photoURL))
-      ..add(DiagnosticsProperty('createdAt', createdAt))
-      ..add(DiagnosticsProperty('lastSeenAt', lastSeenAt));
+  String toString() {
+    return 'Instructor(id: $id, displayName: $displayName, email: $email, bio: $bio, specialty: $specialty, isEmailVerified: $isEmailVerified, phone: $phone, photoURL: $photoURL, createdAt: $createdAt, lastSeenAt: $lastSeenAt)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _User &&
+        (other is _Instructor &&
             (identical(other.id, id) ||
                 const DeepCollectionEquality().equals(other.id, id)) &&
             (identical(other.displayName, displayName) ||
@@ -233,6 +250,11 @@ class _$_User extends _User with DiagnosticableTreeMixin {
                     .equals(other.displayName, displayName)) &&
             (identical(other.email, email) ||
                 const DeepCollectionEquality().equals(other.email, email)) &&
+            (identical(other.bio, bio) ||
+                const DeepCollectionEquality().equals(other.bio, bio)) &&
+            (identical(other.specialty, specialty) ||
+                const DeepCollectionEquality()
+                    .equals(other.specialty, specialty)) &&
             (identical(other.isEmailVerified, isEmailVerified) ||
                 const DeepCollectionEquality()
                     .equals(other.isEmailVerified, isEmailVerified)) &&
@@ -255,6 +277,8 @@ class _$_User extends _User with DiagnosticableTreeMixin {
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(displayName) ^
       const DeepCollectionEquality().hash(email) ^
+      const DeepCollectionEquality().hash(bio) ^
+      const DeepCollectionEquality().hash(specialty) ^
       const DeepCollectionEquality().hash(isEmailVerified) ^
       const DeepCollectionEquality().hash(phone) ^
       const DeepCollectionEquality().hash(photoURL) ^
@@ -262,31 +286,36 @@ class _$_User extends _User with DiagnosticableTreeMixin {
       const DeepCollectionEquality().hash(lastSeenAt);
 
   @override
-  _$UserCopyWith<_User> get copyWith =>
-      __$UserCopyWithImpl<_User>(this, _$identity);
+  _$InstructorCopyWith<_Instructor> get copyWith =>
+      __$InstructorCopyWithImpl<_Instructor>(this, _$identity);
 }
 
-abstract class _User extends User {
-  const _User._() : super._();
-  const factory _User(
+abstract class _Instructor extends Instructor {
+  const _Instructor._() : super._();
+  const factory _Instructor(
       {@required UniqueId id,
-      @required @nullable String displayName,
-      @required String email,
-      @required @nullable bool isEmailVerified,
+      @required @nullable DisplayName displayName,
+      @required EmailAddress email,
+      @required Biography bio,
+      @required Specialty specialty,
+      @required bool isEmailVerified,
       @required @nullable String phone,
       @required @nullable String photoURL,
       @required DateTime createdAt,
-      @required DateTime lastSeenAt}) = _$_User;
+      @required DateTime lastSeenAt}) = _$_Instructor;
 
   @override
   UniqueId get id;
   @override
   @nullable
-  String get displayName;
+  DisplayName get displayName;
   @override
-  String get email;
+  EmailAddress get email;
   @override
-  @nullable
+  Biography get bio;
+  @override
+  Specialty get specialty;
+  @override
   bool get isEmailVerified;
   @override
   @nullable
@@ -299,5 +328,5 @@ abstract class _User extends User {
   @override
   DateTime get lastSeenAt;
   @override
-  _$UserCopyWith<_User> get copyWith;
+  _$InstructorCopyWith<_Instructor> get copyWith;
 }

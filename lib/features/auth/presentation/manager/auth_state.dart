@@ -6,7 +6,8 @@ abstract class AuthState with _$AuthState {
   const factory AuthState({
     @required DisplayName displayName,
     @required EmailAddress emailAddress,
-    @required EmailAddress parentEmailAddress,
+    @required EmailAddress guardianEmailAddress,
+    @required Gender gender,
     @required Password password,
     @required Password newPassword,
     Subscription subscription,
@@ -20,7 +21,8 @@ abstract class AuthState with _$AuthState {
   factory AuthState.init() => AuthState(
         displayName: DisplayName(""),
         emailAddress: EmailAddress(""),
-        parentEmailAddress: EmailAddress(""),
+        guardianEmailAddress: EmailAddress(""),
+        gender: Gender(GenderType.Male),
         password: Password(""),
         newPassword: Password(""),
       );

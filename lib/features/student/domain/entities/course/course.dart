@@ -66,5 +66,53 @@ abstract class Course implements _$Course {
           about: About.dflt,
           createdAt: DateTime.now(),
         ),
+        //
+        Course(
+          id: UniqueId(),
+          categoryId: UniqueId(),
+          title: CourseTitle(input: "User Experience Design course on Springboard"),
+          description: CourseDescription(input: "null"),
+          rating: CourseRating(input: 1.7),
+          topics: Topics.list,
+          instructor: User.guest(),
+          about: About.dflt,
+          createdAt: DateTime.now(),
+        ),
+        //
+        Course(
+          id: UniqueId(),
+          categoryId: UniqueId(),
+          title: CourseTitle(input: "Visual elements of User Interface Design."),
+          description: CourseDescription(input: "null"),
+          rating: CourseRating(input: 4.0),
+          topics: Topics.list,
+          instructor: User.guest(),
+          about: About.dflt,
+          createdAt: DateTime.now(),
+        ),
+        //
+        Course(
+          id: UniqueId(),
+          categoryId: UniqueId(),
+          title: CourseTitle(input: "Google Digital Skills for Africa"),
+          description: CourseDescription(input: "null"),
+          rating: CourseRating(input: 5.0),
+          topics: Topics.list,
+          instructor: User.guest(),
+          about: About.dflt,
+          createdAt: DateTime.now(),
+        ),
+        //
+        Course(
+          id: UniqueId(),
+          categoryId: UniqueId(),
+          title: CourseTitle(input: "Fundamentals of Node.js - Zero to Hero (Advanced course)"),
+          description: CourseDescription(input: "null"),
+          rating: CourseRating(input: 3.0),
+          topics: Topics.list,
+          instructor: User.guest(),
+          about: About.dflt,
+          createdAt: DateTime.now(),
+        ),
       ];
 }

@@ -50,6 +50,7 @@ class CoursesIndexPage extends StatelessWidget {
                   height: App.height * 0.13,
                   progress: 0.72,
                   showProgress: true,
+                  showDurationAndLesson: true,
                 ),
               ),
             ],

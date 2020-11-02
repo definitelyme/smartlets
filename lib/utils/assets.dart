@@ -67,8 +67,8 @@ mixin AppAssets {
 
   static SvgPicture friendsOnline = SvgPicture.asset(
     '$HOME_SVG_DIR/friends_online.svg',
-    height: App.width * 0.35,
-    width: App.width * 0.35,
+    height: App.width * 0.55,
+    width: App.width * 0.55,
     fit: BoxFit.contain,
   );
 
@@ -165,9 +165,27 @@ mixin AppAssets {
     width: 50,
   );
 
-  // static SvgPicture coding_1 = SvgPicture.asset(
-  //   '$STUDENT_SVG_DIR/coding_1.svg',
-  //   color: Colors.white.withOpacity(0.2),
-  //   fit: BoxFit.contain,
-  // );
+  static SvgPicture coursesSvg = SvgPicture.asset(
+    '$STUDENT_SVG_DIR/book_filled.svg',
+    fit: BoxFit.contain,
+    color: Colors.white,
+    height: 25,
+    width: 25,
+  );
+
+  static SvgPicture projectsSvg = SvgPicture.asset(
+    '$STUDENT_SVG_DIR/project-management.svg',
+    fit: BoxFit.contain,
+    color: Colors.white,
+    height: 25,
+    width: 25,
+  );
+
+  static SvgPicture awardsSvg = SvgPicture.asset(
+    '$STUDENT_SVG_DIR/trophy.svg',
+    fit: BoxFit.contain,
+    color: Colors.white,
+    height: 25,
+    width: 25,
+  );
 }
