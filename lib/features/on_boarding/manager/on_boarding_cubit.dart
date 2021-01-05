@@ -59,12 +59,17 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
     User firestoreUser;
 
     if (_auth.currentUser.isSome()) {
+      // TODO: Wrap in a try & catch (for poor internet connection)
       firestoreUser = await _userFacade.single;
       await (await box).put(SUBSCRIPTION_KEY, firestoreUser.role?.name ?? local);
     }
 
     emit(state.copyWith(
-      role: firestoreUser?.role != null ? firestoreUser.role : local != null ? Roles.valueOf(local) : Roles.student,
+      role: firestoreUser?.role != null
+          ? firestoreUser.role
+          : local != null
+              ? Roles.valueOf(local)
+              : Roles.student,
       isLoading: false,
     ));
   }

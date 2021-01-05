@@ -9,21 +9,30 @@ import 'package:smartlets/utils/utils.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+  //   statusBarColor: Colors.transparent,
+  //   statusBarBrightness: Brightness.dark,
+  //   statusBarIconBrightness: Brightness.light,
+  //   systemNavigationBarIconBrightness: Brightness.light,
+  // ));
+
   // Setup Environmental variables & Service provider
   await BuildEnvironment.init(flavor: BuildFlavor.dev);
   assert(env != null);
 
-  // Add Google Fonts Licensing
-  // LicenseRegistry.addLicense(() async* {
-  //   final license = await rootBundle.loadString('assets/fonts/google_fonts/OFL.txt');
-  //   yield LicenseEntryWithLineBreaks(['google_fonts'], license);
-  // });
+  try {
+    // Initializes Hive with a valid directory in your app files.
+    await Hive.initFlutter();
+  } catch (e, trace) {
+    log.e("Error initializing Hive", e, trace);
+  }
 
-  // Initializes Hive with a valid directory in your app files.
-  await Hive.initFlutter();
-
-  // Initialize Hydrated storage
-  HydratedBloc.storage = await HydratedStorage.build();
+  try {
+    // Initialize Hydrated storage
+    HydratedBloc.storage = await HydratedStorage.build();
+  } catch (e, trace) {
+    log.e("Error initializing HydratedStorage", e, trace);
+  }
 
   runApp(SmartletsApp());
 }

@@ -7,7 +7,7 @@ part 'guardian.freezed.dart';
 
 @freezed
 @immutable
-abstract class Guardian implements _$Guardian {
+abstract class Guardian implements _$Guardian, BaseUser {
   const Guardian._();
 
   const factory Guardian({

@@ -8,6 +8,7 @@ import 'package:smartlets/features/parent/presentation/screens/export.dart';
 import 'package:smartlets/features/student/presentation/pages/student_pages.dart';
 import 'package:smartlets/features/student/presentation/screens/course_details/course_detail_index_page.dart';
 import 'package:smartlets/features/student/presentation/screens/exports.dart';
+import 'package:smartlets/widgets/edit_image_screen.dart';
 
 @AdaptiveAutoRouter(
   routes: <AutoRoute>[
@@ -17,7 +18,8 @@ import 'package:smartlets/features/student/presentation/screens/exports.dart';
     /// AUTH SCREENS START ///
     AdaptiveRoute(path: "/login", page: LoginScreen, cupertinoPageTitle: "Login", maintainState: true),
     AdaptiveRoute(path: "/register", page: SignupScreen, cupertinoPageTitle: "Sign Up", maintainState: true),
-    AdaptiveRoute(path: "/forgot-password", page: ForgotPasswordScreen, cupertinoPageTitle: "Forgot Password", maintainState: true),
+    AdaptiveRoute(
+        path: "/forgot-password", page: ForgotPasswordScreen, cupertinoPageTitle: "Forgot Password", maintainState: true),
     AdaptiveRoute(page: EmailSentScreen, cupertinoPageTitle: "Success", maintainState: true, fullscreenDialog: true),
 
     /// AUTH SCREENS END ///
@@ -169,6 +171,14 @@ import 'package:smartlets/features/student/presentation/screens/exports.dart';
         maintainState: true,
       ),
     ]),
+    //
+    AdaptiveRoute(
+        path: "/edit-photo",
+        cupertinoPageTitle: "Edit Photo",
+        page: EditImageScreen,
+        maintainState: true,
+        fullscreenDialog: true,
+    ),
     //
     AdaptiveRoute(path: "*", cupertinoPageTitle: "Error 404", page: UnknownRoute, maintainState: true),
   ],

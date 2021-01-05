@@ -2,6 +2,9 @@
     package="com.mida.smartlets">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <queries>
         <!-- Specific apps you interact with, eg: -->
@@ -12,6 +15,7 @@
         android:name="io.flutter.app.FlutterApplication"
         android:label="@string/app_name"
         android:icon="@mipmap/ic_launcher"
+        android:requestLegacyExternalStorage="true"
         android:usesCleartextTraffic="true">
         <activity
             android:name=".MainActivity"
@@ -68,5 +72,11 @@
             </intent-filter>
         </activity>
         <!-- Facebook Setup [END] -->
+
+        <!-- UCropActivity from pub/image_cropper -->
+        <activity
+            android:name="com.yalantis.ucrop.UCropActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
     </application>
 </manifest>

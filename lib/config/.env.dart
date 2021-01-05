@@ -20,7 +20,7 @@ class BuildEnvironment {
   static Future<void> init({@required BuildFlavor flavor}) async {
     _env ??= BuildEnvironment._init(
       flavor: flavor,
-      splashDuration: flavor == BuildFlavor.dev ? const Duration(milliseconds: 500) : const Duration(seconds: 2),
+      splashDuration: flavor == BuildFlavor.dev ? Duration.zero : const Duration(milliseconds: 1500),
     );
 
     switch (flavor) {

@@ -27,7 +27,9 @@ class AuthWatcherCubit extends Cubit<AuthWatcherState> {
   AuthWatcherCubit(this._facade, this._userFacade) : super(AuthWatcherState.init());
 
   // This will always return the current user data
-  User get currentUser => _facade.currentUser.getOrElse(() => null);
+  User get firebaseUser => _facade.currentUser.getOrElse(() => null);
+
+  Future<User> get future => _userFacade.single;
 
   void listenToAuthChanges(Tasks actions) async {
     emit(state.copyWith(
@@ -59,7 +61,7 @@ class AuthWatcherCubit extends Cubit<AuthWatcherState> {
 
   Future<void> get unsubscribeUserChanges async => await _userChanges?.cancel();
 
-  void get signOut async {
+  Future<void> get signOut async {
     emit(state.copyWith(isLoading: true));
 
     try {

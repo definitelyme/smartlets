@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_portal/flutter_portal.dart';
 import 'package:smartlets/features/auth/domain/core/auth.dart';
-import 'package:smartlets/features/auth/presentation/manager/auth_bloc.dart';
 import 'package:smartlets/features/auth/presentation/manager/auth_watcher/auth_watcher_cubit.dart';
 import 'package:smartlets/features/parent/domain/entities/entities.dart';
 import 'package:smartlets/features/parent/presentation/widgets/parent_widgets.dart';
@@ -19,11 +18,13 @@ class ParentProfileIndex extends StatelessWidget with AutoRouteWrapper {
 
   @override
   Widget wrappedRoute(BuildContext context) {
-    return BlocProvider(
-      create: (_) => getIt<AuthBloc>(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => getIt<ProfileImageCubit>()),
+      ],
       child: BlocBuilder<AuthWatcherCubit, AuthWatcherState>(
         builder: (context, _) => PortalEntry(
-          visible: context.select<AuthWatcherCubit, bool>((value) => value.state.isLoading),
+          visible: context.watch<AuthWatcherCubit>().state.isLoading,
           portal: App.circularLoadingOverlay,
           child: this,
         ),
@@ -36,66 +37,79 @@ class ParentProfileIndex extends StatelessWidget with AutoRouteWrapper {
     return Scaffold(
       body: SafeArea(
         top: false,
-        child: Center(
-          child: Padding(
-            padding: EdgeInsets.zero.copyWith(top: App.mediaQuery.padding.top * 2),
-            child: Column(
-              children: [
-                AutoSizeText(
-                  "Profile",
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                  minFontSize: 30,
-                  textAlign: TextAlign.center,
-                ),
-                //
-                VerticalSpace(height: App.height * 0.02),
-                //
-                Column(
-                  children: [
-                    getIt<AuthFacade>().currentUser.fold(
-                          () => SizedBox.shrink(),
-                          (a) => AuthenticatedProfileTile(),
-                        ),
-                    //
-                    Divider(
-                      thickness: 0.7,
-                      height: 0.0,
-                      indent: 20.0,
-                      endIndent: 20.0,
-                    ),
-                  ],
-                ),
-                //
-                VerticalSpace(height: App.height * 0.02),
-                //
-                Flexible(
-                  child: Column(
-                    children: tiles.map(
-                      (tile) {
-                        if (!tile.builder.isNull)
-                          return Flexible(
-                            child: tile.builder(context),
-                          );
-                        return Flexible(
-                          child: ListTile(
-                            dense: true,
-                            leading: Container(
-                              padding: const EdgeInsets.all(6.5),
-                              decoration: BoxDecoration(color: tile.leadingColor, borderRadius: BorderRadius.circular(8.0)),
-                              child: tile.leading,
-                            ),
-                            title: Text("${tile.title}", style: const TextStyle(fontSize: 16.5)),
-                            subtitle: Text("${tile.subtitle}", style: const TextStyle(fontSize: 13.0)),
-                            onTap: () => tile.onPressed(context),
-                          ),
-                        );
-                      },
-                    ).toList(),
+        child: SingleChildScrollView(
+          clipBehavior: Clip.antiAlias,
+          physics: Helpers.physics,
+          scrollDirection: Axis.vertical,
+          child: Center(
+            child: Padding(
+              padding: EdgeInsets.zero.copyWith(top: App.mediaQuery.padding.top * 2),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  AutoSizeText(
+                    "Profile",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+                    minFontSize: 20,
+                    textAlign: TextAlign.center,
                   ),
-                ),
-                //
-                VerticalSpace(height: App.height * 0.08),
-              ],
+                  //
+                  VerticalSpace(height: App.height * 0.02),
+                  //
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      AuthenticatedProfileTile(),
+                      //
+                      Divider(
+                        thickness: 0.7,
+                        height: 0.0,
+                        indent: 20.0,
+                        endIndent: 20.0,
+                      ),
+                    ],
+                  ),
+                  //
+                  VerticalSpace(height: App.height * 0.02),
+                  //
+                  Flexible(
+                    child: PortalEntry(
+                      visible: context.watch<ProfileImageCubit>().state.showPicker,
+                      portal: GestureDetector(
+                        behavior: HitTestBehavior.opaque,
+                        onTap: () => context.read<ProfileImageCubit>().shouldShowImagePicker(false),
+                      ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: tiles.map(
+                          (tile) {
+                            if (!tile.builder.isNull)
+                              return Flexible(
+                                child: tile.builder(context),
+                              );
+                            return Flexible(
+                              child: ListTile(
+                                dense: true,
+                                minVerticalPadding: 0.0,
+                                leading: Container(
+                                  padding: const EdgeInsets.all(6.0),
+                                  decoration: BoxDecoration(color: tile.leadingColor, borderRadius: BorderRadius.circular(8.0)),
+                                  child: tile.leading,
+                                ),
+                                title: Text("${tile.title}", style: const TextStyle(fontSize: 16.5)),
+                                subtitle: Text("${tile.subtitle}", style: const TextStyle(fontSize: 13.0)),
+                                onTap: () => tile.onPressed(context),
+                              ),
+                            );
+                          },
+                        ).toList(),
+                      ),
+                    ),
+                  ),
+                  //
+                  VerticalSpace(height: App.height * 0.08),
+                ],
+              ),
             ),
           ),
         ),

@@ -65,5 +65,9 @@
       <key>NSAllowsArbitraryLoads</key>
       <true/>
     </dict>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>Smartlets requires access to Photo Library to function properly.</string>
+    <key>NSCameraUsageDescription</key>
+    <string>Smartlets requires access to Photo Library to function properly.</string>
 </dict>
 </plist>

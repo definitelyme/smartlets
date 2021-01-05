@@ -9,7 +9,6 @@ import 'package:smartlets/features/auth/domain/core/auth.dart';
 import 'package:smartlets/features/student/domain/domain.dart';
 import 'package:smartlets/features/student/presentation/screens/course_details/video_widget.dart';
 import 'package:smartlets/manager/locator/locator.dart';
-import 'package:smartlets/utils/smartlets_icons.dart';
 import 'package:smartlets/utils/utils.dart';
 import 'package:smartlets/widgets/widgets.dart';
 
@@ -43,11 +42,8 @@ class _CourseDetailIndexPageState extends State<CourseDetailIndexPage> with Auto
 
     return Scaffold(
       body: SafeArea(
-        left: true,
-        right: true,
         bottom: false,
         child: CustomScrollView(
-          shrinkWrap: true,
           slivers: [
             SliverList(
               delegate: SliverChildListDelegate(
@@ -69,15 +65,14 @@ class _CourseDetailIndexPageState extends State<CourseDetailIndexPage> with Auto
                             ),
                           ),
                           Flexible(
-                            flex: 2,
                             child: AutoSizeText(
                               widget.course.title.value.getOrElse(() => ""),
                               maxLines: 3,
-                              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 22.0),
+                              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20.0),
+                              overflow: TextOverflow.ellipsis,
                               textAlign: TextAlign.left,
                               softWrap: true,
                               wrapWords: true,
-                              overflow: TextOverflow.ellipsis,
                             ),
                           ),
                           Flexible(
@@ -88,44 +83,22 @@ class _CourseDetailIndexPageState extends State<CourseDetailIndexPage> with Auto
                                   children: [
                                     Icon(Smartlets.clock_icon, size: 20.0, color: AppColors.fromHex("#6E798C")),
                                     //
-                                    AutoSizeText("  "),
-                                    //
-                                    Visibility(
-                                      visible: widget.course.duration.inHours > 0,
-                                      child: AutoSizeText.rich(
-                                        TextSpan(children: [
-                                          TextSpan(
-                                            text: "${widget.course.duration.inHours}",
-                                            style: TextStyle(fontWeight: FontWeight.w600),
-                                          ),
-                                          TextSpan(text: " "),
-                                          TextSpan(
-                                            text: "hour".pluralize(widget.course.duration.inHours),
-                                            style: TextStyle(fontSize: 16.0),
-                                          ),
-                                        ], style: TextStyle(color: AppColors.fromHex("#6E798C"), fontSize: 17.0)),
-                                        maxLines: 1,
-                                      ),
-                                    ),
-                                    //
-                                    AutoSizeText(" "),
-                                    //
-                                    Visibility(
-                                      visible: widget.course.duration.inHours <= 0 && widget.course.duration.inMinutes.remainder(60) > 0,
-                                      child: AutoSizeText.rich(
-                                        TextSpan(children: [
-                                          TextSpan(
-                                            text: "${widget.course.duration.inMinutes.remainder(60)}",
-                                            style: TextStyle(fontWeight: FontWeight.w600),
-                                          ),
-                                          TextSpan(text: " "),
-                                          TextSpan(
-                                            text: "minute".pluralize(widget.course.duration.inMinutes.remainder(60)),
-                                            style: TextStyle(fontSize: 16.0),
-                                          ),
-                                        ], style: TextStyle(color: AppColors.fromHex("#6E798C"), fontSize: 17.0)),
-                                        maxLines: 1,
-                                      ),
+                                    AutoSizeText.rich(
+                                      TextSpan(children: [
+                                        TextSpan(text: " "),
+                                        //
+                                        if (widget.course.duration.inHours > 0)
+                                          span(count: widget.course.duration.inHours, item: "hour"),
+                                        //
+                                        if (widget.course.duration.inMinutes.remainder(60) > 0) ...[
+                                          TextSpan(text: "  "),
+                                          span(count: widget.course.duration.inMinutes.remainder(60), item: "minute"),
+                                        ],
+                                      ]),
+                                      maxLines: 1,
+                                      wrapWords: false,
+                                      overflow: TextOverflow.ellipsis,
+                                      textAlign: TextAlign.justify,
                                     ),
                                   ],
                                 ),
@@ -134,22 +107,13 @@ class _CourseDetailIndexPageState extends State<CourseDetailIndexPage> with Auto
                                   children: [
                                     Icon(Smartlets.lesson_icon, size: 20.0, color: AppColors.fromHex("#6E798C")),
                                     //
-                                    AutoSizeText("  "),
-                                    //
                                     AutoSizeText.rich(
                                       TextSpan(children: [
-                                        TextSpan(
-                                          text: "${widget.course.lessons}",
-                                          style: TextStyle(fontWeight: FontWeight.w600),
-                                        ),
-                                        TextSpan(text: " "),
-                                        TextSpan(
-                                          text: "lessons",
-                                          style: TextStyle(fontSize: 16.0),
-                                        ),
-                                      ], style: TextStyle(color: AppColors.fromHex("#6E798C"), fontSize: 17.0)),
-                                      maxLines: 1,
-                                    ),
+                                        TextSpan(text: "  "),
+                                        //
+                                        span(count: widget.course.lessons, item: "lesson"),
+                                      ]),
+                                    )
                                   ],
                                 ),
                                 //
@@ -197,5 +161,25 @@ class _CourseDetailIndexPageState extends State<CourseDetailIndexPage> with Auto
         ),
       ),
     );
+  }
+
+  InlineSpan span({
+    int count = 0,
+    @required String item,
+    double itemFontSize = 16.0,
+    FontWeight counterFontWeight = FontWeight.w600,
+    double counterFontSize = 17.0,
+  }) {
+    return TextSpan(children: [
+      TextSpan(
+        text: "$count",
+        style: TextStyle(fontWeight: counterFontWeight, fontSize: counterFontSize),
+      ),
+      TextSpan(text: " ", style: TextStyle(fontSize: 13.0)),
+      TextSpan(
+        text: item.pluralize(count),
+        style: TextStyle(fontSize: itemFontSize),
+      ),
+    ], style: TextStyle(color: AppColors.fromHex("#6E798C"), fontSize: 17.0));
   }
 }

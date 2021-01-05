@@ -16,6 +16,7 @@ import 'package:smartlets/utils/utils.dart';
 class GuardianAuthImpl with FirestoreAuthMixin<Guardian> {
   final FirebaseFirestore _firestore;
   final DataConnectionChecker _connectionChecker;
+
   // Temporary document snapshot (Used to check if fieldIsNull)
   GetOptions _options = GetOptions(source: Source.serverAndCache);
   DocumentSnapshot _temp;
@@ -35,7 +36,10 @@ class GuardianAuthImpl with FirestoreAuthMixin<Guardian> {
   Future<Guardian> get single async {
     await checkHasInternet;
     DocumentSnapshot doc = await _firestore.parents.user.get(_options);
-    return GuardianDTO.fromDocument(doc).domain;
+    if (doc.exists) {
+      return GuardianDTO.fromDocument(doc).domain;
+    } else
+      return null;
   }
 
   @override

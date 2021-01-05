@@ -21,6 +21,12 @@ if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
 
+def keystoreProperties = new Properties()
+def keystorePropertiesFile = rootProject.file('key.properties')
+if (keystorePropertiesFile.exists()) {
+   keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+}
+
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'com.google.gms.google-services'
@@ -31,14 +37,13 @@ android {
     ndkVersion '21.3.6528147'
 
 
-
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
 
     lintOptions {
         disable 'InvalidPackage'
-        checkReleaseBuilds false
+        // checkReleaseBuilds false
     }
 
     defaultConfig {
@@ -55,20 +60,24 @@ android {
         debug {
             storeFile rootProject.file('app\\keystore\\debug-key.jks')
             keyAlias "debugKey"
-            keyPassword "debugKey"
-            storePassword "debugKey"
+            keyPassword "android"
+            storePassword "android"
         }
         release {
-            storeFile rootProject.file('app\\keystore\\prod-key.jks')
-            keyAlias "prodKey"
-            keyPassword "prodKey"
-            storePassword "prodKey"
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
+            storePassword keystoreProperties['storePassword']
         }
     }
 
     buildTypes {
+        debug {
+            signingConfig signingConfigs.debug
+        }
         release {
-            // Signing with the debug keys for now, so `flutter run --release` works.
+        	shrinkResources false
+            minifyEnabled false
             signingConfig signingConfigs.release
         }
     }
@@ -78,14 +87,12 @@ android {
     productFlavors {
         dev {
             dimension "app"
-            resValue "string", "app_name", "Smartlets Dev"
             versionNameSuffix "-dev"
             applicationIdSuffix ".dev"
             signingConfig signingConfigs.debug
         }
         prod {
             dimension "app"
-            resValue "string", "app_name", "Smartlets"
             signingConfig signingConfigs.release
         }
     }
@@ -98,7 +105,7 @@ flutter {
 dependencies {
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'com.google.firebase:firebase-analytics:17.5.0'
+    implementation 'com.google.firebase:firebase-analytics:18.0.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'

@@ -9,6 +9,7 @@ export 'extensions/dynamic_extension.dart';
 export 'extensions/firestore_extension.dart';
 export 'extensions/list_extension.dart';
 export 'extensions/num_extension.dart';
+export 'extensions/storage_facade_extension.dart';
 export 'extensions/string_extension.dart';
 export 'helpers.dart';
 export 'smartlets_icons.dart';

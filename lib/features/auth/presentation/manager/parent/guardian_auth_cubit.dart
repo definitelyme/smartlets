@@ -62,6 +62,11 @@ class GuardianAuthCubit extends Cubit<GuardianAuthState> {
     emit(state.copyWith(isLoading: false, status: _result));
   }
 
+  Future<void> detachListeners() async {
+    await _readSubscription?.cancel();
+    await _watchSubscription?.cancel();
+  }
+
   void notifyWatchUpdate(KtList<Guardian> guardians, Either<FirestoreAuthFailure, Unit> status) {
     emit(state.copyWith(
       parents: guardians,
@@ -78,8 +83,7 @@ class GuardianAuthCubit extends Cubit<GuardianAuthState> {
 
   @override
   Future<void> close() async {
-    await _watchSubscription?.cancel();
-    await _readSubscription?.cancel();
+    await detachListeners();
     return super.close();
   }
 }

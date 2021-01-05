@@ -5,6 +5,7 @@
 // **************************************************************************
 
 // ignore_for_file: public_member_api_docs
+import 'dart:io';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
@@ -19,6 +20,7 @@ import 'package:smartlets/features/student/domain/domain.dart';
 import 'package:smartlets/features/student/presentation/pages/student_pages.dart';
 import 'package:smartlets/features/student/presentation/screens/course_details/course_detail_index_page.dart';
 import 'package:smartlets/features/student/presentation/screens/exports.dart';
+import 'package:smartlets/widgets/edit_image_screen.dart';
 
 class Routes {
   static const String splashScreen = '/';
@@ -38,6 +40,7 @@ class Routes {
   static const String gamesScreen = '/students/games';
   static const String studentProfileScreen = '/students/profile';
   static const String courseDetailScreen = '/students/course-details';
+  static const String editImageScreen = '/edit-photo';
   static const String unknownRoute = '*';
   static const all = <String>{
     splashScreen,
@@ -57,6 +60,7 @@ class Routes {
     gamesScreen,
     studentProfileScreen,
     courseDetailScreen,
+    editImageScreen,
     unknownRoute,
   };
 }
@@ -118,6 +122,7 @@ class Router extends RouterBase {
       page: CourseDetailScreen,
       generator: CourseDetailScreenRouter(),
     ),
+    RouteDef(Routes.editImageScreen, page: EditImageScreen),
     RouteDef(Routes.unknownRoute, page: UnknownRoute),
   ];
   @override
@@ -262,6 +267,21 @@ class Router extends RouterBase {
         maintainState: true,
       );
     },
+    EditImageScreen: (data) {
+      final args = data.getArgs<EditImageScreenArguments>(
+        orElse: () => EditImageScreenArguments(),
+      );
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => EditImageScreen(
+          key: args.key,
+          file: args.file,
+        ).wrappedRoute(context),
+        settings: data,
+        cupertinoTitle: 'Edit Photo',
+        fullscreenDialog: true,
+        maintainState: true,
+      );
+    },
     UnknownRoute: (data) {
       return buildAdaptivePageRoute<dynamic>(
         builder: (context) => UnknownRoute(),
@@ -348,6 +368,15 @@ extension RouterExtendedNavigatorStateX on ExtendedNavigatorState {
       push<dynamic>(
         Routes.courseDetailScreen,
         arguments: CourseDetailScreenArguments(key: key, course: course),
+      );
+
+  Future<dynamic> pushEditImageScreen({
+    Key key,
+    File file,
+  }) =>
+      push<dynamic>(
+        Routes.editImageScreen,
+        arguments: EditImageScreenArguments(key: key, file: file),
       );
 
   Future<dynamic> pushUnknownRoute() => push<dynamic>(Routes.unknownRoute);
@@ -937,6 +966,13 @@ class CourseDetailScreenArguments {
   final Key key;
   final Course course;
   CourseDetailScreenArguments({this.key, @required this.course});
+}
+
+/// EditImageScreen arguments holder class
+class EditImageScreenArguments {
+  final Key key;
+  final File file;
+  EditImageScreenArguments({this.key, this.file});
 }
 
 /// ChildCoursesPage arguments holder class

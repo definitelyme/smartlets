@@ -7,7 +7,7 @@ part 'student.freezed.dart';
 
 @freezed
 @immutable
-abstract class Student implements _$Student {
+abstract class Student implements _$Student, BaseUser {
   const Student._();
 
   const factory Student({

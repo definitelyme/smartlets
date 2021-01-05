@@ -28,21 +28,24 @@ class SmartletsApp extends StatelessWidget {
         BlocProvider<OnBoardingCubit>(create: (_) => getIt<OnBoardingCubit>()..getRole()),
         BlocProvider<AuthWatcherCubit>(create: (_) => getIt<AuthWatcherCubit>()),
         BlocProvider<FirebaseFunctionsCubit>(create: (_) => getIt<FirebaseFunctionsCubit>()),
+        BlocProvider<PermissionsCubit>(create: (_) => getIt<PermissionsCubit>()),
         BlocProvider<CreditCardCubit>(create: (_) => getIt<CreditCardCubit>()),
       ],
       child: BlocBuilder<ThemeCubit, AppTheme>(
-        builder: (context, state) => Portal(
-          child: MaterialApp(
-            title: AppStrings.appName.capitalizeFirst(),
-            debugShowCheckedModeBanner: false,
-            theme: state?.themeData() ?? AppTheme.light().themeData(),
-            darkTheme: AppTheme.dark().themeData(),
-            builder: ExtendedNavigator(
-              navigatorKey: App.key,
-              initialRoute: Routes.splashScreen,
-              observers: [NavigationHistoryObserver()],
-              router: Router(),
-              guards: [AuthGuard()],
+        builder: (context, app) => BlocBuilder<PermissionsCubit, PermissionsState>(
+          builder: (context, _) => Portal(
+            child: MaterialApp(
+              title: AppStrings.appName.capitalizeFirst(),
+              debugShowCheckedModeBanner: false,
+              theme: app?.themeData() ?? AppTheme.light().themeData(),
+              darkTheme: AppTheme.dark().themeData(),
+              builder: ExtendedNavigator(
+                navigatorKey: App.key,
+                initialRoute: Routes.splashScreen,
+                observers: [NavigationHistoryObserver()],
+                router: Router(),
+                guards: [AuthGuard()],
+              ),
             ),
           ),
         ),

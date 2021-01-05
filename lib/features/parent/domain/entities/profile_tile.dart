@@ -50,7 +50,7 @@ class ProfileTile {
           leading: AppAssets.notification,
           builder: (context) => SwitchListTile.adaptive(
             secondary: Container(
-              padding: const EdgeInsets.all(6.5),
+              padding: const EdgeInsets.all(6.0),
               decoration: BoxDecoration(color: AppColors.fromHex("#12FF46"), borderRadius: BorderRadius.circular(8.0)),
               child: AppAssets.notification,
             ),
@@ -59,7 +59,7 @@ class ProfileTile {
             dense: true,
             value: true,
             activeColor: App.theme.accentColor,
-            onChanged: (notify) {},
+            onChanged: (shouldNotify) {},
           ),
         ),
         //
@@ -76,7 +76,7 @@ class ProfileTile {
           builder: (context) => BlocBuilder<ThemeCubit, AppTheme>(
             builder: (context, state) => SwitchListTile.adaptive(
               secondary: Container(
-                padding: const EdgeInsets.all(6.5),
+                padding: const EdgeInsets.all(6.0),
                 decoration: BoxDecoration(borderRadius: BorderRadius.circular(8.0)),
                 child:
                     Helpers.optionOf(AppAssets.night, RotatedBox(quarterTurns: 90, child: Icon(Icons.wb_incandescent_rounded))),
@@ -102,7 +102,18 @@ class ProfileTile {
           leading: AppAssets.exit,
           subtitle: "Signout from ${AppStrings.appName.toLowerCase()} platform",
           color: AppColors.fromHex("#5FA2FF"),
-          onPressed: (_) => BlocProvider.of<AuthWatcherCubit>(_).signOut,
+          onPressed: (_) async {
+            // Detach all firestore listeners [Essential]
+            await BlocProvider.of<OnBoardingCubit>(App.context).state.role?.fold(
+                  parent: () async => await BlocProvider.of<GuardianAuthCubit>(_)?.detachListeners(),
+                  student: () async => await BlocProvider.of<StudentAuthCubit>(_)?.detachListeners(),
+                );
+            // Signout user
+            await BlocProvider.of<AuthWatcherCubit>(_).signOut;
+            // Navigate to Home screen
+            if (App.currentRoute != Routes.onBoardingScreen)
+              navigator.pushAndRemoveUntil(Routes.onBoardingScreen, (route) => false);
+          },
         ),
       ];
 }

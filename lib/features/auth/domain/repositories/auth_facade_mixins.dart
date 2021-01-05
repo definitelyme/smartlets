@@ -4,6 +4,7 @@ import 'package:kt_dart/kt.dart' hide nullable;
 import 'package:meta/meta.dart';
 import 'package:smartlets/features/auth/domain/core/auth.dart';
 import 'package:smartlets/features/parent/domain/entities/entities.dart';
+import 'package:smartlets/utils/utils.dart';
 
 mixin FirebaseDepMixin {
   Future<Either<AuthFailure, Unit>> signInWithCredentials([AuthCredential old, AuthCredential incoming]);
@@ -34,6 +35,8 @@ mixin FirestoreAuthMixin<T> {
     if (e is FirebaseException) {
       String error = e.code;
       String message = e.message;
+
+      if (env.flavor == BuildFlavor.dev) log.e(message, error);
 
       switch (error) {
         case ABORTED:

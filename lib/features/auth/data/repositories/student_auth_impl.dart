@@ -35,7 +35,10 @@ class StudentAuthImpl with FirestoreAuthMixin<Student> {
   Future<Student> get single async {
     await checkHasInternet;
     DocumentSnapshot doc = await _firestore.students.user.get(_options);
-    return StudentDTO.fromDocument(doc).domain;
+    if (doc.exists) {
+      return StudentDTO.fromDocument(doc).domain;
+    } else
+      return null;
   }
 
   @override

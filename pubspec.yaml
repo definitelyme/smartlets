@@ -18,9 +18,13 @@ dependencies:
   retry: ^3.0.1
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: 1.0.2
+  cupertino_icons: ^1.0.2
   # Draw SVG files on a Flutter Widget.
   flutter_svg: any
+  # A Flutter plugin for finding commonly used locations on the filesystem.
+  path_provider: ^1.6.24
+  # A comprehensive, cross-platform path manipulation library for Dart.
+  path: ^1.7.0
   ###
   ### Firebase Packages ###
   ###
@@ -35,8 +39,10 @@ dependencies:
   cloud_firestore: ^0.14.4
   # A FlutterFire plugin for Cloud functions
   cloud_functions: ^0.7.2
+  # A Flutter plugin to use the Firebase Cloud Storage API.
+  firebase_storage: ^5.2.0
   # For Facebook authentication
-  flutter_login_facebook: ^0.4.1
+  flutter_login_facebook: ^0.4.2+2
   # Check Internet connectivity
   data_connection_checker: ^0.3.4
   # Service locator
@@ -64,7 +70,7 @@ dependencies:
   # Flutter widget that automatically resizes text to fit perfectly within its bounds
   auto_size_text: ^2.1.0
   # simplifies dependency injection
-  injectable: ^1.0.5
+  injectable: ^1.0.7
   # provides internationalization
   # and localization facilities
   intl: ^0.16.1
@@ -79,11 +85,11 @@ dependencies:
   # customization when notifying your user.
   flushbar: ^1.10.4
   # Toast Library for Flutter
-  fluttertoast: ^7.1.5
+  fluttertoast: ^7.1.4
   # Shimmer Skeleton Library.
   shimmer: ^1.1.2
   # A Flutter package for easy implementation of fluid navigation bar.
-  curved_navigation_bar: ^0.3.4
+  curved_navigation_bar: ^0.3.7
   # A port of Kotlin's Kotlin Standard library for Dart/Flutter projects.
   kt_dart: ^0.8.0
   # Customizable rating bar for flutter
@@ -98,7 +104,7 @@ dependencies:
   video_player: ">=0.10.0 <2.0.0"
   # This package provides visually beautiful UX
   # through animation of credit card information input form.
-  credit_card_input_form: ^2.1.3
+  credit_card_input_form: ^2.1.4
   # Defines the annotations used by json_serializable
   # to create code for JSON serialization and deserialization.
   json_annotation: ^3.1.1
@@ -111,15 +117,16 @@ dependencies:
   # A flutter input widget built atop flutter_portal for Mentions (Chat screens)
   flutter_mentions: ^1.0.11
   # A flutter library to show images from the internet and keep them in the cache directory.
-  cached_network_image: ^2.4.1
+  cached_network_image: ^2.5.0
   # A Flutter plugin for iOS and Android for picking images from the image library,
   # and taking new pictures with the camera.
   image_picker: ^0.6.7+17
-  # A Dart library providing the ability to load,
-  # save and manipulate images in a variety of different file formats.
-  image: ^2.1.19
+  # A flutter plugin to crop image on iOS and Android.
+  image_crop_widget: ^0.0.6
   # This library is an animation library for Flutter
   animator: ^2.0.2
+  # Plugin for permission management on runtime.
+  permissions_plugin: ^1.1.4
 
 dependency_overrides:
   analyzer: ^0.41.1
@@ -134,7 +141,7 @@ dev_dependencies:
   # Code Generators
   build_runner: ^1.10.11
   freezed: ^0.12.6
-  injectable_generator: ^1.0.6
+  injectable_generator: ^1.0.7
   built_value_generator: ^7.1.0
   auto_route_generator: ^0.6.10
   json_serializable: ^3.5.1
@@ -145,15 +152,18 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/
     - assets/svgs/
+    - assets/svgs/home/profile/
+    - assets/svgs/home/student/
+    - assets/images/
     - assets/svgs/auth/
     - assets/svgs/home/
-    - assets/svgs/home/student/
+    - assets/fonts/google_fonts/
+    - assets/
+    - assets/fonts/config/
     - assets/images/home/
     - assets/images/home/student/
-    - assets/fonts/google_fonts/
-
+    - assets/fonts/
 
   fonts:
     - family: AppIcons

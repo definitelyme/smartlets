@@ -15,7 +15,7 @@ part 'user.freezed.dart';
 
 @freezed
 @immutable
-abstract class User implements _$User {
+abstract class User implements _$User, BaseUser {
   @protected
   const User._();
 

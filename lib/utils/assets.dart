@@ -10,11 +10,13 @@ mixin AppAssets {
   static const AUTH_SVG_DIR = "$SVG_DIR/auth";
   static const HOME_SVG_DIR = "$SVG_DIR/home";
   static const STUDENT_SVG_DIR = "$HOME_SVG_DIR/student";
+  static const PROFILE_SVG_DIR = "$HOME_SVG_DIR/profile";
   static const HOME_IMAGES_DIR = "$IMAGES_DIR/home";
   static const STUDENT_IMAGES_DIR = "$HOME_IMAGES_DIR/student";
 
   static String anonymous = "$HOME_IMAGES_DIR/default-user.png";
-  static String onlineAnonymous = "https://firebasestorage.googleapis.com/v0/b/smartlets-x.appspot.com/o/assets%2Fdefault-user.png"
+  static String onlineAnonymous =
+      "https://firebasestorage.googleapis.com/v0/b/smartlets-x.appspot.com/o/assets%2Fdefault-user.png"
       "?alt=media&token=82e08454-1786-4f0f-989a-03605e489a64";
 
   static String courseFrame1 = "$STUDENT_IMAGES_DIR/frame_1.jpg";
@@ -185,7 +187,21 @@ mixin AppAssets {
     '$STUDENT_SVG_DIR/trophy.svg',
     fit: BoxFit.contain,
     color: Colors.white,
-    height: 25,
-    width: 25,
+    height: 27.5,
+    width: 27.5,
+  );
+
+  static SvgPicture camera = SvgPicture.asset(
+    '$PROFILE_SVG_DIR/camera_colored.svg',
+    fit: BoxFit.contain,
+    height: 30,
+    width: 30,
+  );
+
+  static SvgPicture gallery = SvgPicture.asset(
+    '$PROFILE_SVG_DIR/gallery_colored_filled.svg',
+    fit: BoxFit.contain,
+    height: 30,
+    width: 30,
   );
 }

@@ -55,7 +55,7 @@ class ChildrenListingPage extends StatelessWidget {
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                         child: ClipRRect(
-                          clipBehavior: Clip.antiAliasWithSaveLayer,
+                          clipBehavior: Clip.hardEdge,
                           borderRadius: BorderRadius.circular(8.0),
                           child: ListTile(
                             onTap: () {},
@@ -100,7 +100,7 @@ class ChildrenListingPage extends StatelessWidget {
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                           child: ClipRRect(
-                            clipBehavior: Clip.antiAliasWithSaveLayer,
+                            clipBehavior: Clip.hardEdge,
                             borderRadius: BorderRadius.circular(8.0),
                             child: ListTile(
                               onTap: () => inner(context).pushShowChildPage(),

@@ -18,12 +18,16 @@ class AppTheme extends HiveObject {
   final Color _primaryColorDark;
   final Color _primaryColorLight;
   final InputDecorationTheme _textFieldTheme;
+  final Color _scaffoldBackgroundColor;
   final Color _toggleableActiveColor;
   final Color _accentColor;
   final Color _splashColor;
-  final dynamic _splashFactory;
+  final InteractiveInkFeatureFactory _splashFactory;
   final VisualDensity _visualDensity;
   final TextTheme _textTheme;
+  final BottomSheetThemeData _bottomSheetThemeData;
+  final BottomNavigationBarThemeData _bottomNavigationBarTheme;
+  final ButtonThemeData _buttonThemeData;
 
   AppTheme._({
     @required this.id,
@@ -35,12 +39,16 @@ class AppTheme extends HiveObject {
     Color primaryColorDark,
     Color primaryColorLight,
     InputDecorationTheme inputTheme,
+    Color scaffoldBackgroundColor,
     Color toggleableActiveColor,
     Color accentColor,
     Color splashColor,
-    dynamic splashFactory,
+    InteractiveInkFeatureFactory splashFactory,
     VisualDensity visualDensity,
     TextTheme textTheme,
+    BottomSheetThemeData bottomSheetThemeData,
+    BottomNavigationBarThemeData bottomNavigationBarTheme,
+    ButtonThemeData buttonThemeData,
   })  : _brightness = brightness,
         _accentColorBrightness = accentColorBrightness,
         _primaryColor = primaryColor,
@@ -50,10 +58,14 @@ class AppTheme extends HiveObject {
         _primaryColorLight = primaryColorLight,
         _toggleableActiveColor = toggleableActiveColor,
         _textFieldTheme = inputTheme,
+        _scaffoldBackgroundColor = scaffoldBackgroundColor,
         _accentColor = accentColor,
         _splashColor = splashColor,
         _splashFactory = splashFactory,
         _visualDensity = visualDensity,
+        _bottomSheetThemeData = bottomSheetThemeData,
+        _bottomNavigationBarTheme = bottomNavigationBarTheme,
+        _buttonThemeData = buttonThemeData,
         _textTheme = textTheme;
 
   /// Light Theme Configurations
@@ -99,11 +111,11 @@ class AppTheme extends HiveObject {
           borderRadius: BorderRadius.circular(8.0),
         ),
       ),
-      textTheme: GoogleFonts.montserratTextTheme(TextTheme()
+      textTheme: TextTheme()
         ..apply(
           displayColor: Colors.black87, // For headline 1 - 6
           bodyColor: Colors.black87, // For every other text style
-        )),
+        ),
     );
   }
 
@@ -149,11 +161,11 @@ class AppTheme extends HiveObject {
           borderRadius: BorderRadius.circular(8.0),
         ),
       ),
-      textTheme: GoogleFonts.montserratTextTheme(TextTheme()
+      textTheme: TextTheme()
         ..apply(
           displayColor: Colors.white, // For headline 1 - 6
           bodyColor: Colors.white, // For every other text style
-        )),
+        ),
     );
   }
 
@@ -171,13 +183,16 @@ class AppTheme extends HiveObject {
       accentColor: this._accentColor,
       splashColor: this._splashColor,
       splashFactory: this._splashFactory,
+      scaffoldBackgroundColor: this._scaffoldBackgroundColor,
       visualDensity: this._visualDensity,
-      textTheme: this._textTheme,
+      bottomSheetTheme: this._bottomSheetThemeData,
+      bottomNavigationBarTheme: this._bottomNavigationBarTheme,
+      buttonTheme: this._buttonThemeData,
+      textTheme: GoogleFonts.montserratTextTheme(this._textTheme),
     );
   }
 
   AppTheme copyWith({
-    String id,
     Brightness brightness,
     Brightness accentColorBrightness,
     Color primaryColor,
@@ -186,15 +201,19 @@ class AppTheme extends HiveObject {
     Color primaryColorDark,
     Color primaryColorLight,
     Color toggleableActiveColor,
+    Color scaffoldBackgroundColor,
     Color accentColor,
     Color splashColor,
     InputDecorationTheme textFieldTheme,
-    dynamic splashFactory,
+    InteractiveInkFeatureFactory splashFactory,
     VisualDensity visualDensity,
     TextTheme textTheme,
+    BottomSheetThemeData bottomSheetThemeData,
+    BottomNavigationBarThemeData bottomNavigationBarTheme,
+    ButtonThemeData buttonThemeData,
   }) {
     return AppTheme._(
-      id: id ?? this.id,
+      id: this.id,
       brightness: brightness ?? this._brightness,
       accentColorBrightness: accentColorBrightness ?? this._accentColorBrightness,
       primaryColor: primaryColor ?? this._primaryColor,
@@ -203,12 +222,16 @@ class AppTheme extends HiveObject {
       primaryColorDark: primaryColorDark ?? this._primaryColorDark,
       primaryColorLight: primaryColorLight ?? this._primaryColorLight,
       inputTheme: textFieldTheme ?? this._textFieldTheme,
+      scaffoldBackgroundColor: scaffoldBackgroundColor ?? this._scaffoldBackgroundColor,
       toggleableActiveColor: toggleableActiveColor ?? this._toggleableActiveColor,
       accentColor: accentColor ?? this._accentColor,
       splashColor: splashColor ?? this._splashColor,
       splashFactory: splashFactory ?? this._splashFactory,
       visualDensity: visualDensity ?? this._visualDensity,
       textTheme: textTheme ?? this._textTheme,
+      bottomSheetThemeData: bottomSheetThemeData ?? this._bottomSheetThemeData,
+      bottomNavigationBarTheme: bottomNavigationBarTheme ?? this._bottomNavigationBarTheme,
+      buttonThemeData: buttonThemeData ?? this._buttonThemeData,
     );
   }
 }

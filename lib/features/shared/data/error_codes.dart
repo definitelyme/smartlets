@@ -1,3 +1,8 @@
+///Unknown error or an error from a different error domain.
+const String UNKNOWN = "unknown";
+const String ERROR_UNKNOWN = "error-unknown";
+
+////////////////// FirebaseAuthException.Code//////////////////////////
 /// Thrown if there already exists an account with the given email address.
 const String EMAIL_ALREADY_IN_USE = "email-already-in-use";
 
@@ -121,5 +126,19 @@ const String UNAVAILABLE = "unavailable";
 ///Operation is not implemented or not supported/enabled.
 const String UNIMPLEMENTED = "unimplemented";
 
-///Unknown error or an error from a different error domain.
-const String UNKNOWN = "unknown";
+////////////////// FirebaseAuthException.Code//////////////////////////
+const String BUCKET_NOT_FOUND = "bucket-not-found";
+
+const String INVALID_CHECKSUM = "invalid-checksum";
+
+const String NOT_AUTHENTICATED = "not-authenticated";
+
+const String NOT_AUTHORIZED = "not-authorized";
+
+const String OBJECT_NOT_FOUND = "object-not-found";
+
+const String PROJECT_NOT_FOUND = "project-not-found";
+
+const String QUOTA_EXCEEDED = "quota-exceeded";
+
+const String RETRY_LIMIT_EXCEEDED = "retry-limit-exceeded";

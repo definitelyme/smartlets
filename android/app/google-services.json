@@ -15,11 +15,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "939677467123-cl6nq451kueu61oqb5n1qti9n6gu2d0n.apps.googleusercontent.com",
+          "client_id": "939677467123-jp67jobfp34nrsahcjl9b8gprpqflci2.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.mida.smartlets",
-            "certificate_hash": "259a3a0507321f7db444eee98ff5022138f12fdd"
+            "certificate_hash": "c9c96d5ce6dd7e7464a9639f140621da956967e2"
           }
         },
         {
@@ -52,11 +52,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "939677467123-m4s37nt31cpnq3fqe8qhk5ks58ipf64h.apps.googleusercontent.com",
+          "client_id": "939677467123-dlu2avm1i2nka00267vstm3o9npjsk44.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.mida.smartlets.dev",
-            "certificate_hash": "0cae690109eccdfd1c2d3e48be5fa4a12758bd75"
+            "certificate_hash": "76bfbe55b317615605c92e844313b6d048c26130"
           }
         },
         {

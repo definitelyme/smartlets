@@ -14,3 +14,15 @@ mixin FirebaseFnConstants {
   static const String CREATE_USER_RECORD_CALLABLE = "calls-createUserRecord-callable";
   static const String UPDATE_USER_RECORD_CALLABLE = "calls-updateUserRecord-callable";
 }
+
+mixin StorageConstants {
+  static const String USERS_FOLDER_NAME = "users";
+
+  static const String STUDENTS_FOLDER_NAME = "students";
+
+  static const String PARENTS_FOLDER_NAME = "parents";
+
+  static const String PROFILE_FOLDER_NAME = "avatar";
+
+  static const String PROFILE_PHOTO_EXTENSION = ".png";
+}

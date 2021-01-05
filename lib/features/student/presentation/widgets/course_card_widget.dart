@@ -46,7 +46,7 @@ class CourseCardWidget extends StatelessWidget {
     return Material(
       color: useAltDurationAndLesson ? backgroundColor : Colors.transparent,
       type: MaterialType.card,
-      clipBehavior: Clip.antiAliasWithSaveLayer,
+      clipBehavior: Clip.antiAlias,
       shape: RoundedRectangleBorder(
         side: BorderSide(
           color: useAltDurationAndLesson ? backgroundColor : AppColors.fromHex("#EBECED"),
@@ -58,226 +58,188 @@ class CourseCardWidget extends StatelessWidget {
       child: InkWell(
         onTap: () => ExtendedNavigator.root.pushCourseDetailScreen(course: course),
         splashColor: Helpers.optionOf(Colors.grey.shade300, Colors.grey.shade600, context: context),
-        child: SizedBox(
+        child: Container(
           height: height,
-          child: Padding(
-            padding: EdgeInsets.symmetric(vertical: App.height * 0.012, horizontal: App.height * 0.012),
-            child: Row(
-              children: [
-                Flexible(
-                  flex: 4,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(imageRadius),
-                    clipBehavior: Clip.antiAliasWithSaveLayer,
-                    child: _image(image),
-                  ),
+          width: double.infinity,
+          padding: EdgeInsets.symmetric(vertical: App.height * 0.012, horizontal: App.height * 0.012),
+          child: Row(
+            children: [
+              Flexible(
+                flex: 5,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(imageRadius),
+                  clipBehavior: Clip.antiAliasWithSaveLayer,
+                  child: _image(image),
                 ),
-                //
-                HorizontalSpace(width: App.height * 0.015),
-                //
-                Expanded(
-                  flex: 10,
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Flexible(
-                              child: Visibility(
-                                visible: useAltDurationAndLesson,
-                                replacement: SizedBox.shrink(),
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    AutoSizeText.rich(
-                                      TextSpan(children: [
-                                        TextSpan(
-                                          text: "${course.lessons}",
-                                          style: TextStyle(fontSize: 15.0),
-                                        ),
-                                        TextSpan(text: " "),
-                                        TextSpan(
-                                          text: "lessons",
-                                          style: TextStyle(fontSize: 15.0),
-                                        ),
-                                      ]),
-                                      maxLines: 1,
-                                    ),
-                                    //
-                                    AutoSizeText(
-                                      "  \u2022  ",
-                                      softWrap: true,
-                                      maxLines: 1,
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: useAltDurationAndLesson ? Colors.black : Theme.of(context).accentColor,
-                                        fontSize: 20,
-                                      ),
-                                    ),
-                                    //
-                                    AutoSizeText(
-                                      "2 Completed",
-                                      maxLines: 1,
-                                      style: TextStyle(
-                                        fontSize: 15.0,
-                                        color: Theme.of(context).accentColor,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            //
-                            Flexible(
-                              flex: 2,
-                              child: AutoSizeText(
-                                "${course.title.value.getOrElse(() => "")}",
-                                style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16.5),
-                                maxLines: 2,
-                                softWrap: true,
-                                wrapWords: true,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ),
-                            //
-                            Flexible(
-                              child: Visibility(
-                                visible: showDurationAndLesson,
-                                replacement: SizedBox.shrink(),
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Visibility(
-                                      visible: course.duration.inHours > 0,
-                                      child: AutoSizeText.rich(
-                                        TextSpan(children: [
-                                          TextSpan(
-                                            text: "${course.duration.inHours}",
-                                            style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16.0),
-                                          ),
-                                          TextSpan(text: " "),
-                                          TextSpan(
-                                            text: "hour".pluralize(course.duration.inHours),
-                                            style: TextStyle(fontSize: 15.0),
-                                          ),
-                                        ]),
-                                        maxLines: 1,
-                                      ),
-                                    ),
-                                    //
-                                    AutoSizeText(" "),
-                                    //
-                                    Visibility(
-                                      visible: course.duration.inMinutes.remainder(60) > 0,
-                                      child: AutoSizeText.rich(
-                                        TextSpan(children: [
-                                          TextSpan(
-                                            text: "${course.duration.inMinutes.remainder(60)}",
-                                            style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16.0),
-                                          ),
-                                          TextSpan(text: " "),
-                                          TextSpan(
-                                            text: "minute".pluralize(course.duration.inMinutes.remainder(60)),
-                                            style: TextStyle(fontSize: 15.0),
-                                          ),
-                                        ]),
-                                        maxLines: 1,
-                                      ),
-                                    ),
-                                    //
-                                    AutoSizeText(
-                                      "  \u2022  ",
-                                      softWrap: true,
-                                      maxLines: 1,
+              ),
+              //
+              HorizontalSpace(width: App.width * 0.035),
+              //
+              Expanded(
+                flex: 16,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Builder(builder: (context) {
+                            if (!useAltDurationAndLesson) return Container();
+                            return Flexible(
+                              child: AutoSizeText.rich(
+                                TextSpan(children: [
+                                  if (course.lessons > 0) ...[
+                                    span(count: course.lessons, item: "lesson", counterFontWeight: FontWeight.normal),
+                                    TextSpan(
+                                      text: "  \u2022  ",
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         color: Theme.of(context).accentColor,
-                                        fontSize: 20,
+                                        fontSize: 16,
                                       ),
                                     ),
-                                    //
-                                    AutoSizeText.rich(
-                                      TextSpan(children: [
-                                        TextSpan(
-                                          text: "${course.lessons}",
-                                          style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16.0),
-                                        ),
-                                        TextSpan(text: " "),
-                                        TextSpan(
-                                          text: "lessons",
-                                          style: TextStyle(fontSize: 15.0),
-                                        ),
-                                      ]),
-                                      maxLines: 1,
-                                    ),
                                   ],
-                                ),
-                              ),
-                            ),
-                            //
-                            Flexible(
-                              child: Visibility(
-                                visible: showRating,
-                                replacement: SizedBox.shrink(),
-                                child: RatingBarIndicator(
-                                  rating: course.rating.getOrCrash,
-                                  itemBuilder: (context, index) => Icon(
-                                    Icons.star,
-                                    color: Colors.amber,
+                                  TextSpan(
+                                    text: "2 Completed",
+                                    style: TextStyle(
+                                      color: Theme.of(context).accentColor,
+                                      fontSize: 14.0,
+                                    ),
                                   ),
-                                  itemCount: 5,
-                                  itemSize: App.height * 0.02,
-                                  direction: Axis.horizontal,
-                                ),
+                                ]),
+                                maxLines: 1,
                               ),
+                            );
+                          }),
+                          //
+                          Flexible(
+                            flex: 2,
+                            child: AutoSizeText(
+                              "${course.title.value.getOrElse(() => "")}",
+                              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16.0),
+                              maxLines: 2,
+                              softWrap: true,
+                              wrapWords: true,
+                              overflow: TextOverflow.ellipsis,
                             ),
-                            //
-                            Flexible(
-                              child: Visibility(
-                                visible: showProgress,
-                                replacement: SizedBox.shrink(),
-                                child: Row(
-                                  children: [
-                                    Expanded(
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(50.0),
-                                        clipBehavior: Clip.antiAliasWithSaveLayer,
-                                        child: LinearProgressIndicator(
-                                          value: progress,
-                                          backgroundColor: backgroundColor == Colors.transparent
-                                              ? Helpers.optionOf(
-                                                  Colors.grey.shade300,
-                                                  Colors.grey.shade700,
-                                                )
-                                              : Helpers.computeLuminance(backgroundColor).withOpacity(0.15),
+                          ),
+                          //
+                          Builder(builder: (context) {
+                            if (!showDurationAndLesson) return Container();
+                            return Visibility(
+                              visible: course.duration.inMinutes.remainder(60) > 0,
+                              child: Flexible(
+                                child: AutoSizeText.rich(
+                                  TextSpan(children: [
+                                    if (course.duration.inHours > 0) span(count: course.duration.inHours, item: "hour"),
+                                    if (course.duration.inMinutes.remainder(60) > 0) ...[
+                                      TextSpan(text: "  "),
+                                      span(count: course.duration.inMinutes.remainder(60), item: "minute"),
+                                    ],
+                                    if (course.lessons > 0) ...[
+                                      TextSpan(
+                                        text: "   \u2022   ",
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: Theme.of(context).accentColor,
+                                          fontSize: 16,
                                         ),
                                       ),
-                                    ),
-                                    //
-                                    HorizontalSpace(width: 12.0),
-                                    //
-                                    AutoSizeText("${(progress * 100).toStringAsPrecision(3)}%", maxLines: 1),
-                                  ],
+                                      span(count: course.lessons, item: "lesson"),
+                                    ],
+                                  ]),
+                                  maxLines: 1,
+                                  minFontSize: 7,
+                                  wrapWords: false,
+                                  overflow: TextOverflow.ellipsis,
+                                  textAlign: TextAlign.justify,
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
+                            );
+                          }),
+                          //
+                          Builder(builder: (context) {
+                            if (!showRating) return Container();
+                            return Flexible(
+                              child: RatingBarIndicator(
+                                rating: course.rating.getOrCrash,
+                                itemBuilder: (context, index) => Icon(
+                                  Icons.star,
+                                  color: Colors.amber,
+                                ),
+                                itemCount: 5,
+                                itemSize: App.height * 0.02,
+                                direction: Axis.horizontal,
+                              ),
+                            );
+                          }),
+                          //
+                          Builder(builder: (context) {
+                            if (!showProgress) return Container();
+                            return Flexible(
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(100.0),
+                                      child: LinearProgressIndicator(
+                                        value: progress,
+                                        backgroundColor: backgroundColor == Colors.transparent
+                                            ? Helpers.optionOf(
+                                                Colors.grey.shade300,
+                                                Colors.grey.shade700,
+                                              )
+                                            : Helpers.computeLuminance(backgroundColor).withOpacity(0.15),
+                                      ),
+                                    ),
+                                  ),
+                                  //
+                                  HorizontalSpace(width: 12.0),
+                                  //
+                                  AutoSizeText(
+                                    "${(progress * 100).toStringAsPrecision(3)}%",
+                                    style: TextStyle(fontSize: 13),
+                                    maxLines: 1,
+                                  ),
+                                ],
+                              ),
+                            );
+                          }),
+                        ],
                       ),
-                      //
-                      Icon(Icons.arrow_forward_ios_rounded, size: 16.0),
-                    ],
-                  ),
+                    ),
+                    //
+                    Icon(Icons.keyboard_arrow_right_rounded, size: 22.0),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
     );
+  }
+
+  InlineSpan span({
+    int count = 0,
+    @required String item,
+    double itemFontSize = 14.0,
+    FontWeight counterFontWeight = FontWeight.w600,
+    double counterFontSize = 14.0,
+  }) {
+    return TextSpan(children: [
+      TextSpan(
+        text: "$count",
+        style: TextStyle(fontWeight: counterFontWeight, fontSize: counterFontSize),
+      ),
+      TextSpan(text: " ", style: TextStyle(fontSize: 13.0)),
+      TextSpan(
+        text: item.pluralize(count),
+        style: TextStyle(fontSize: itemFontSize),
+      ),
+    ]);
   }
 }

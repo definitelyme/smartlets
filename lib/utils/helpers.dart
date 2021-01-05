@@ -9,6 +9,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:logger/logger.dart';
 import 'package:navigation_history_observer/navigation_history_observer.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:smartlets/manager/theme/theme.dart';
 import 'package:smartlets/utils/utils.dart';
 import 'package:smartlets/widgets/widgets.dart';
@@ -41,6 +42,9 @@ class Helpers {
   static Helpers get I => Helpers._();
   static double buttonRadius = 12.0;
   static double appPadding = App.width * 0.04;
+  static Future<Directory> get rootDir async => await getExternalStorageDirectory();
+  static Future<Directory> get cacheDir async => await getTemporaryDirectory();
+  static Future<Directory> get documentsDir async => await getApplicationDocumentsDirectory();
   static ScrollPhysics physics = const BouncingScrollPhysics();
   static Duration willPopTimeout = const Duration(seconds: 3);
   static Logger logger = Logger(

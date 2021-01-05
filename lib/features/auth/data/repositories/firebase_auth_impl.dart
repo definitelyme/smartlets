@@ -398,7 +398,7 @@ class FirebaseAuthImpl implements AuthFacade {
       ]);
 
       switch (result.status) {
-        case FacebookLoginStatus.Success:
+        case FacebookLoginStatus.success:
           // Fetch AuthCredentials
           AuthCredential credential = FacebookAuthProvider.credential(result.accessToken.token);
           // Fetch User's Email Address
@@ -449,10 +449,10 @@ class FirebaseAuthImpl implements AuthFacade {
           }
 
           return _result;
-        case FacebookLoginStatus.Cancel:
+        case FacebookLoginStatus.cancel:
           throw AuthFailure.cancelledAction();
           break;
-        case FacebookLoginStatus.Error:
+        case FacebookLoginStatus.error:
           print("Facebook error TITLE ===> ${result.error?.localizedTitle}");
           print("Facebook error (for developer) ===> ${result.error?.developerMessage}");
           throw AuthFailure.unknownFailure(code: "${result.status.index}", message: "${result.error?.localizedDescription}");
