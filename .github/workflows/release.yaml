@@ -19,6 +19,7 @@ jobs:
     env:
       APP_NAME: "Smartlets"
       GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+      RELEASE_NAME: "patch"
       RELEASE_TYPE: patch
     runs-on: ubuntu-latest
     outputs:
@@ -41,26 +42,26 @@ jobs:
           sudo chmod -R 777 /usr/local/lib/android/sdk/ndk
           sudo chown -R $USER:$USER /usr/local/lib/android/sdk/ndk
 
-      - name: NDK Cache
+      - name: Fetch NDK Cache
         id: ndk_cache
         uses: actions/cache@v2
         with:
           path: /usr/local/lib/android/sdk/ndk
-          key: ${{ runner.os }}-ndk_cache-21.0.6113669
+          key: ${{ runner.os }}-ndk_cache-21.3.6528147
 
-      - name: Install NDK
+      - name: Install NDK (If no Cache)
         if: steps.ndk_cache.outputs.cache-hit != 'true'
-        run: echo "y" | sudo ${ANDROID_HOME}/tools/bin/sdkmanager --install "ndk;21.0.6113669" --sdk_root=${ANDROID_SDK_ROOT}
+        run: echo "y" | sudo ${ANDROID_HOME}/tools/bin/sdkmanager --install "ndk;21.3.6528147" --sdk_root=${ANDROID_SDK_ROOT}
 
       - name: Set up Flutter Environment
         uses: subosito/flutter-action@v1
         with:
-          # flutter-version: '1.21.x'
+          flutter-version: '1.25.x'
           channel: 'beta'
 
       - run: flutter pub get
       - run: flutter test
-      - run: flutter build apk -t lib/main.dart --release --target-platform android-arm,android-arm64 --split-per-abi --flavor=prod
+      - run: flutter build apk -t lib/main.dart --release --split-per-abi --target-platform android-arm,android-arm64 --flavor prod
 
       - name: Bump version and push tag
         id: bump_tag
@@ -72,15 +73,15 @@ jobs:
       - name: Push APK to Release Tags
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "build/app/outputs/apk/prod/release/*.apk,build/app/outputs/apk/release/*.apk,build/app/outputs/apk/*"
-          name: ${{ env.APP_NAME }}-${{ steps.bump_tag.outputs.new_version }}
+          artifacts: "build/app/outputs/apk/*.apk,build/app/outputs/apk/prod/release/*.apk,build/app/outputs/apk/release/*.apk"
+          name: ${{ env.APP_NAME }} v${{ steps.bump_tag.outputs.new_version }}
           tag: ${{ steps.bump_tag.outputs.new_tag }}
           token: ${{ env.GITHUB_TOKEN }}
           allowUpdates: true
           omitName: false
           omitBody: false
 
-  notify:
+  slack-notify:
     runs-on: ubuntu-latest
     needs: build
     env:
@@ -91,7 +92,8 @@ jobs:
         uses: rtCamp/action-slack-notify@master
         env:
           SLACK_COLOR: '#FF8845'
-          SLACK_TITLE: ${{ env.APP_NAME }} APK release version ${{ needs.build.outputs.bump_tag_version }}
+          SLACK_TITLE: ${{ env.APP_NAME }} ${{ env.RELEASE_NAME }} release version ${{ needs.build.outputs.bump_tag_version }}
           SLACK_MESSAGE: Version ${{ needs.build.outputs.bump_tag_version }} of ${{ env.APP_NAME }} mobile app is available for download at https://github.com/f0rx/smartlets/releases/tag/${{ needs.build.outputs.bump_tag }}
           SLACK_WEBHOOK: ${{ env.SLACK_WEBHOOK }}
-          SLACK_FOOTER: Powered by f0rx
+          SLACK_MSG_AUTHOR: f0rx
+          SLACK_FOOTER: Powered by Smartlets Bot

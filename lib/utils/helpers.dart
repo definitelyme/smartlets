@@ -21,7 +21,8 @@ final log = Helpers.logger;
 
 ExtendedNavigatorState<RouterBase> get navigator => App.context.navigator;
 
-ExtendedNavigatorState<RouterBase> inner(BuildContext context) => ExtendedNavigator.of(context);
+ExtendedNavigatorState<RouterBase> inner(BuildContext context) =>
+    ExtendedNavigator.of(context);
 
 NavigationHistoryObserver get observer => NavigationHistoryObserver();
 
@@ -42,13 +43,17 @@ class Helpers {
   static Helpers get I => Helpers._();
   static double buttonRadius = 12.0;
   static double appPadding = App.width * 0.04;
-  static Future<Directory> get rootDir async => await getExternalStorageDirectory();
+  static Future<Directory> get rootDir async =>
+      await getExternalStorageDirectory();
   static Future<Directory> get cacheDir async => await getTemporaryDirectory();
-  static Future<Directory> get documentsDir async => await getApplicationDocumentsDirectory();
+  static Future<Directory> get documentsDir async =>
+      await getApplicationDocumentsDirectory();
   static ScrollPhysics physics = const BouncingScrollPhysics();
   static Duration willPopTimeout = const Duration(seconds: 3);
   static Logger logger = Logger(
-    filter: env.flavor == BuildFlavor.dev ? DevelopmentFilter() : ProductionFilter(),
+    filter: env.flavor == BuildFlavor.dev
+        ? DevelopmentFilter()
+        : ProductionFilter(),
     printer: HybridPrinter(PrettyPrinter(
       methodCount: 3, // number of method calls to be displayed
       errorMethodCount: 10, // number of method calls if stacktrace is provided
@@ -66,28 +71,37 @@ class Helpers {
     return '';
   }
 
-  static DateTime getDate(DateTime d) => DateTime(d.year, d.month, d.day, d.hour, d.minute, d.second);
+  static DateTime getDate(DateTime d) =>
+      DateTime(d.year, d.month, d.day, d.hour, d.minute, d.second);
 
   static void hideKeyboard([BuildContext context]) {
     FocusNode currentFocus = FocusScope.of(context ?? App.context);
-    if (!currentFocus.hasPrimaryFocus && !currentFocus.hasFocus && currentFocus.children.isEmpty)
+    if (!currentFocus.hasPrimaryFocus &&
+        !currentFocus.hasFocus &&
+        currentFocus.children.isEmpty)
       FocusManager.instance.primaryFocus.unfocus();
   }
 
   static T optionOf<T>(dynamic _default, dynamic dark, {BuildContext context}) {
     assert(_default != null);
     assert(dark != null);
-    var isDarkMode = BlocProvider.of<ThemeCubit>(context ?? App.context).isDarkMode ||
-        (MediaQuery.of(context ?? App.context).platformBrightness == Brightness.dark);
+    var isDarkMode =
+        BlocProvider.of<ThemeCubit>(context ?? App.context).isDarkMode ||
+            (MediaQuery.of(context ?? App.context).platformBrightness ==
+                Brightness.dark);
 
     return isDarkMode ? dark : _default;
   }
 
-  static Color computeLuminance(Color color) => color.computeLuminance() > 0.5 ? Colors.black : Colors.white;
+  static Color computeLuminance(Color color) =>
+      color.computeLuminance() > 0.5 ? Colors.black : Colors.white;
 
   static Future<void> precache(BuildContext context) async {
     context ??= App.context;
-    await precachePicture(ExactAssetPicture(SvgPicture.svgStringDecoder, "${AppAssets.SVG_DIR}/doodle.svg"), context);
+    await precachePicture(
+        ExactAssetPicture(
+            SvgPicture.svgStringDecoder, "${AppAssets.SVG_DIR}/doodle.svg"),
+        context);
     await precacheImage(AssetImage(AppAssets.anonymous), context);
     await precacheImage(AssetImage(AppAssets.courseFrame1), context);
     await precacheImage(AssetImage(AppAssets.courseFrame2), context);
@@ -106,7 +120,8 @@ class Helpers {
   }
 
   static Future<void> platformPop({bool animated = true}) async {
-    await SystemChannels.platform.invokeMethod<void>('SystemNavigator.pop', animated);
+    await SystemChannels.platform
+        .invokeMethod<void>('SystemNavigator.pop', animated);
   }
 
   final DateTime today = DateTime.now();
@@ -186,7 +201,8 @@ class Helpers {
   double get width => MediaQuery.of(context).size.width;
 
   /// Check if dark mode theme is enable on platform on android Q+
-  bool get isPlatformDarkMode => (mediaQuery.platformBrightness == Brightness.dark);
+  bool get isPlatformDarkMode =>
+      (mediaQuery.platformBrightness == Brightness.dark);
 
   /// Push the given [page], and then pop several [pages] in the stack until
   /// [predicate] returns true
@@ -196,10 +212,13 @@ class Helpers {
     return global(id).currentState.pushAndRemoveUntil(page, predicate);
   }
 
-  Future<T> offAllNamed<T>(String newRouteName, {RoutePredicate predicate, Object arguments, int id}) {
+  Future<T> offAllNamed<T>(String newRouteName,
+      {RoutePredicate predicate, Object arguments, int id}) {
     var route = (Route<dynamic> rota) => false;
 
-    return global(id).currentState.pushNamedAndRemoveUntil(newRouteName, predicate ?? route, arguments: arguments);
+    return global(id).currentState.pushNamedAndRemoveUntil(
+        newRouteName, predicate ?? route,
+        arguments: arguments);
   }
 
   /// Push the given named [page], and then pop several pages in the stack
@@ -214,7 +233,9 @@ class Helpers {
     int id,
     Object arguments,
   }) {
-    return global(id).currentState.pushNamedAndRemoveUntil(page, predicate, arguments: arguments);
+    return global(id)
+        .currentState
+        .pushNamedAndRemoveUntil(page, predicate, arguments: arguments);
   }
 
   /// Pop the current named page and pushes a new [page] to the stack in its place
@@ -225,8 +246,11 @@ class Helpers {
   /// The `offNamed()` pop a page, and goes to the next. The `offAndToNamed()` goes
   /// to the next page, and removes the previous one. The route transition
   /// animation is different.
-  Future<T> offAndToNamed<T>(String page, {Object arguments, int id, dynamic result}) {
-    return global(id).currentState.popAndPushNamed(page, arguments: arguments, result: result);
+  Future<T> offAndToNamed<T>(String page,
+      {Object arguments, int id, dynamic result}) {
+    return global(id)
+        .currentState
+        .popAndPushNamed(page, arguments: arguments, result: result);
   }
 
   /// Remove a specific [route] from the stack
@@ -291,11 +315,6 @@ class Helpers {
     bool useSafeArea = true,
     bool useRootNavigator = true,
     RouteSettings routeSettings,
-    @Deprecated('Instead of using the "child" argument, return the child from a closure '
-        'provided to the "builder" argument. This will ensure that the BuildContext '
-        'is appropriate for widgets built in the dialog. '
-        'This feature was deprecated after v0.2.3.')
-        Widget child,
   }) async {
     if (Platform.isIOS)
       return showCupertinoDialog<U>(
@@ -313,7 +332,6 @@ class Helpers {
       useSafeArea: useSafeArea ?? true,
       useRootNavigator: useRootNavigator ?? true,
       routeSettings: routeSettings,
-      child: child,
     );
   }
 }
@@ -326,7 +344,9 @@ class Log with LogMixin {
 }
 
 mixin LogMixin {
-  void d({String tag, String message, dynamic ex}) => print("debug: $tag: $message\n\n$ex");
+  void d({String tag, String message, dynamic ex}) =>
+      print("debug: $tag: $message\n\n$ex");
 
-  void w({String tag, String message, dynamic ex}) => print("Warning!! $tag: $message\n\n$ex");
+  void w({String tag, String message, dynamic ex}) =>
+      print("Warning!! $tag: $message\n\n$ex");
 }
